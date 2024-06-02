@@ -1,22 +1,27 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
+import './globals.css'
 
-const inter = Inter({ subsets: ["latin"] });
+import type { Metadata } from 'next'
+import { DM_Mono } from 'next/font/google'
+
+const dmMono = DM_Mono({
+  subsets: ['latin'],
+  weight: ['300', '400', '500'],
+  variable: '--font-dm-mono'
+})
 
 export const metadata: Metadata = {
-  title: "Api platform",
-  description: "Created by Opentensor",
-};
+  title: 'Api platform',
+  description: 'Created by Opentensor'
+}
 
 export default function RootLayout({
-  children,
+  children
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
+    <html lang="en" suppressHydrationWarning className={dmMono.className}>
+      <body className="flex flex-col min-h-screen w-screen dark:bg-black p-8 ">{children}</body>
     </html>
-  );
+  )
 }
