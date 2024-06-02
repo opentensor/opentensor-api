@@ -14,6 +14,7 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle
 } from '@/components/ui/navigation-menu'
+import { ThemeToggle } from '@/components/ui/theme-toggle'
 import { cn } from '@/lib/utils'
 
 export function Navbar() {
@@ -40,11 +41,14 @@ export function Navbar() {
             </Link>
           </NavigationMenuItem>
           <NavigationMenuItem>
-            <Link href="#" legacyBehavior passHref>
-              <NavigationMenuLink className={navigationMenuTriggerStyle()}>Register</NavigationMenuLink>
+            <Link href="/auth/login" legacyBehavior passHref>
+              <NavigationMenuLink className={navigationMenuTriggerStyle()}>Login</NavigationMenuLink>
             </Link>
           </NavigationMenuItem>
         </NavigationMenuList>
+        <div>
+          <ThemeToggle />
+        </div>
       </NavigationMenu>
     </header>
   )
