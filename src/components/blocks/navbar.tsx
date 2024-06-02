@@ -40,7 +40,7 @@ export function Navbar() {
             </Link>
           </NavigationMenuItem>
           <NavigationMenuItem>
-            <Link href="/auth/register" legacyBehavior passHref>
+            <Link href="#" legacyBehavior passHref>
               <NavigationMenuLink className={navigationMenuTriggerStyle()}>Register</NavigationMenuLink>
             </Link>
           </NavigationMenuItem>
