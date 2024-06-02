@@ -1,4 +1,3 @@
-import { Navbar } from '@/components/blocks/navbar'
 import TermsFooter from '@/components/blocks/termsfooter'
 import { ThemeToggle } from '@/components/ui/theme-toggle'
 
