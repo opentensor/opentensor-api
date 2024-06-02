@@ -37,7 +37,12 @@ function Login() {
             <Label htmlFor="email" className="text-xs font-normal leading-6 tracking-wider">
               EMAIL
             </Label>
-            <Input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+            <Input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="border border-slate-500"
+            />
           </div>
 
           {/* <div className="w-full flex flex-col gap-3">
