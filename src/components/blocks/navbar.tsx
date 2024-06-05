@@ -28,15 +28,23 @@ export function Navbar() {
         <NavigationMenuList>
           <NavigationMenuItem>
             <NavigationMenuTrigger>EXPLORE</NavigationMenuTrigger>
-            <NavigationMenuContent>
+            <NavigationMenuContent className="left-[0.5rem]">
               <ul className="flex flex-col w-[80px] gap-3 p-4 font-normal text-xs">
-                <li className="hover:cursor-pointer hover:underline">ABOUT</li>
-                <li className="hover:cursor-pointer hover:underline">BLOG</li>
+                <Link href={'/about'} className="hover:cursor-pointer hover:underline">
+                  ABOUT
+                </Link>
+                <Link
+                  href={process.env.NEXT_PUBLIC_BLOG_LINK!}
+                  target="_blank"
+                  className="hover:cursor-pointer hover:underline"
+                >
+                  BLOG
+                </Link>
               </ul>
             </NavigationMenuContent>
           </NavigationMenuItem>
           <NavigationMenuItem>
-            <Link href="/docs" legacyBehavior passHref>
+            <Link href={process.env.NEXT_PUBLIC_DOCS_LINK!} target="_blank" legacyBehavior passHref>
               <NavigationMenuLink className={navigationMenuTriggerStyle()}>DOCS</NavigationMenuLink>
             </Link>
           </NavigationMenuItem>
@@ -45,13 +53,25 @@ export function Navbar() {
             <NavigationMenuTrigger>CONNECT</NavigationMenuTrigger>
             <NavigationMenuContent className="left-[10.5rem]">
               <ul className="flex flex-col w-[270px] gap-3 p-4 font-normal text-xs">
-                <Link href={process.env.NEXT_PUBLIC_GITHUB_LINK!} className="hover:cursor-pointer hover:underline">
+                <Link
+                  href={process.env.NEXT_PUBLIC_GITHUB_LINK!}
+                  target="_blank"
+                  className="hover:cursor-pointer hover:underline"
+                >
                   GITHUB
                 </Link>
-                <Link href={process.env.NEXT_PUBLIC_DISCORD_LINK!} className="hover:cursor-pointer hover:underline">
+                <Link
+                  href={process.env.NEXT_PUBLIC_DISCORD_LINK!}
+                  target="_blank"
+                  className="hover:cursor-pointer hover:underline"
+                >
                   DISCORD
                 </Link>
-                <Link href={process.env.NEXT_PUBLIC_TWITTER_LINK!} className="hover:cursor-pointer hover:underline">
+                <Link
+                  href={process.env.NEXT_PUBLIC_TWITTER_LINK!}
+                  target="_blank"
+                  className="hover:cursor-pointer hover:underline"
+                >
                   X(Twitter)
                 </Link>
               </ul>
