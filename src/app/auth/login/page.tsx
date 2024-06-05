@@ -20,7 +20,7 @@ function Login() {
     e.preventDefault()
   }
   return (
-    <div className="flex flex-col justify-center items-center h-full gap-4 lg:w-[30%] md:w-[40%] xl:w-[20%]">
+    <div className="flex flex-col justify-center items-center h-full gap-4 lg:w-[30%] md:w-[40%] xl:w-[22%]">
       <Link href={'/'} className="my-8">
         <Image src={'/logo.svg'} width={72} height={70} alt="brand-logo" className="dark:invert" />
       </Link>
@@ -57,12 +57,12 @@ function Login() {
           <p className="text-xs text-zinc-400 ">
             By signing in, you agree to our terms, acceptable use, and privacy policy.
           </p>
-          <div className="flex items-center space-x-2">
+          {/* <div className="flex items-center space-x-2">
             <Checkbox id="remember" />
             <Label htmlFor="remember" className="text-xs font-normal">
               REMEMBER ME
             </Label>
-          </div>
+          </div> */}
         </div>
       </div>
       <div className="flex flex-col gap-4 items-center ">

@@ -27,25 +27,45 @@ export function Navbar() {
       <NavigationMenu>
         <NavigationMenuList>
           <NavigationMenuItem>
-            <NavigationMenuTrigger>Explore</NavigationMenuTrigger>
+            <NavigationMenuTrigger>EXPLORE</NavigationMenuTrigger>
             <NavigationMenuContent>
-              <ul className="flex flex-col w-[200px] gap-3 p-4 font-normal text-sm">
-                <li className="hover:cursor-pointer hover:underline">About</li>
-                <li className="hover:cursor-pointer hover:underline">Blog</li>
+              <ul className="flex flex-col w-[80px] gap-3 p-4 font-normal text-xs">
+                <li className="hover:cursor-pointer hover:underline">ABOUT</li>
+                <li className="hover:cursor-pointer hover:underline">BLOG</li>
               </ul>
             </NavigationMenuContent>
           </NavigationMenuItem>
           <NavigationMenuItem>
             <Link href="/docs" legacyBehavior passHref>
-              <NavigationMenuLink className={navigationMenuTriggerStyle()}>Docs</NavigationMenuLink>
+              <NavigationMenuLink className={navigationMenuTriggerStyle()}>DOCS</NavigationMenuLink>
             </Link>
           </NavigationMenuItem>
+
           <NavigationMenuItem>
-            <Link href="/auth/login" legacyBehavior passHref>
-              <NavigationMenuLink className={navigationMenuTriggerStyle()}>Login</NavigationMenuLink>
-            </Link>
+            <NavigationMenuTrigger>CONNECT</NavigationMenuTrigger>
+            <NavigationMenuContent className="left-[10.5rem]">
+              <ul className="flex flex-col w-[270px] gap-3 p-4 font-normal text-xs">
+                <Link href={process.env.NEXT_PUBLIC_GITHUB_LINK!} className="hover:cursor-pointer hover:underline">
+                  GITHUB
+                </Link>
+                <Link href={process.env.NEXT_PUBLIC_DISCORD_LINK!} className="hover:cursor-pointer hover:underline">
+                  DISCORD
+                </Link>
+                <Link href={process.env.NEXT_PUBLIC_TWITTER_LINK!} className="hover:cursor-pointer hover:underline">
+                  X(Twitter)
+                </Link>
+              </ul>
+            </NavigationMenuContent>
           </NavigationMenuItem>
         </NavigationMenuList>
+      </NavigationMenu>
+      <NavigationMenu>
+        <div>
+          <Link href="/auth/login" legacyBehavior passHref>
+            <NavigationMenuLink className={navigationMenuTriggerStyle()}>Login</NavigationMenuLink>
+          </Link>
+        </div>
+
         <div>
           <ThemeToggle />
         </div>
