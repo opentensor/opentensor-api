@@ -1,23 +1,45 @@
 'use client'
+import { ReloadIcon } from '@radix-ui/react-icons'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useSearchParams } from 'next/navigation'
+import { signIn } from 'next-auth/react'
 import React from 'react'
 import { FaGithub } from 'react-icons/fa6'
 import { FcGoogle } from 'react-icons/fc'
 import { GrApple } from 'react-icons/gr'
 
 import { Button } from '@/components/ui/button'
-import { Checkbox } from '@/components/ui/checkbox'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 
 function Login() {
   const [email, setEmail] = React.useState('')
   // const [password, setPassword] = React.useState('')
+  const [loading, setLoading] = React.useState(false)
+  const [authError, setAuthError] = React.useState<string | null>(null)
+
+  const query = useSearchParams()
+
+  React.useEffect(() => {
+    if (query?.get('error')) {
+      setAuthError(query.get('error'))
+    }
+  }, [query])
 
   async function submitHandler(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
+    try {
+      setLoading(true)
+      await signIn('email', {
+        email: email,
+        callbackUrl: '/dashboard'
+      })
+      setLoading(false)
+    } catch (error) {
+      console.log(error)
+    }
   }
   return (
     <div className="flex flex-col justify-center items-center h-full gap-4 lg:w-[30%] md:w-[40%] xl:w-[22%]">
@@ -30,9 +52,14 @@ function Login() {
           <p className="font-light text-xs tracking-widest">
             {`Login to your ${process.env.NEXT_PUBLIC_BRAND_NAME || 'Opentensor.ai'}  account to accesss API and Apps`}
           </p>
+          {authError && (
+            <div className="text-xs text-red-500">
+              <p>{'There was an error. Please try using different sign-in method.'}</p>
+            </div>
+          )}
         </div>
 
-        <div className="space-y-6 gap-3">
+        <form onSubmit={submitHandler} className="space-y-6 gap-3">
           <div className="w-full flex flex-col gap-3">
             <Label htmlFor="email" className="text-xs font-normal leading-6 tracking-wider">
               EMAIL
@@ -51,8 +78,15 @@ function Login() {
             </Label>
             <Input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
           </div> */}
-          <Button onClick={() => console.log(email)} className="font-normal w-full">
-            Continue with Email
+          <Button disabled={loading} type="submit" className="font-normal w-full">
+            {loading ? (
+              <>
+                <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
+                Please wait
+              </>
+            ) : (
+              'Continue with Email'
+            )}
           </Button>
           <p className="text-xs text-zinc-400 ">
             By signing in, you agree to our terms, acceptable use, and privacy policy.
@@ -63,7 +97,7 @@ function Login() {
               REMEMBER ME
             </Label>
           </div> */}
-        </div>
+        </form>
       </div>
       <div className="flex flex-col gap-4 items-center ">
         <div className="flex flex-col gap-3 items-center">
@@ -79,8 +113,9 @@ function Login() {
       <div className="flex flex-col w-full gap-4">
         <Button
           variant="outline"
+          disabled={loading}
           className="gap-24 flex items-center rounded-md px-2 py-1.5  outline-none font-normal h-[48px] tracking-wide  hover:opacity-[0.86]"
-          // onClick={() => signIn('google', { callbackUrl: '/dashboard' })}
+          onClick={() => signIn('google', { callbackUrl: '/dashboard' })}
         >
           <motion.div
             className={`w-full flex items-center`}
@@ -96,8 +131,9 @@ function Login() {
 
         <Button
           variant="outline"
+          disabled={loading}
           className="gap-24 flex items-center rounded-md px-2 py-1.5  outline-none font-normal h-[48px] tracking-wide  hover:opacity-[0.86]"
-          // onClick={() => signIn('github', { callbackUrl: '/dashboard' })}
+          onClick={() => signIn('github', { callbackUrl: '/dashboard' })}
         >
           <motion.div
             className={`w-full flex items-center`}
@@ -113,6 +149,7 @@ function Login() {
 
         <Button
           variant="outline"
+          disabled={loading}
           className="gap-24 flex items-center rounded-md px-2 py-1.5  outline-none font-normal h-[48px] tracking-wide  hover:opacity-[0.86] "
         >
           <motion.div

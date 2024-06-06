@@ -3,6 +3,7 @@ import './globals.css'
 import type { Metadata } from 'next'
 import { DM_Mono } from 'next/font/google'
 
+import { AuthProvider } from '@/components/providers/auth-provider'
 import { Themeprovider } from '@/components/providers/theme-provider'
 
 const dmMono = DM_Mono({
@@ -13,7 +14,8 @@ const dmMono = DM_Mono({
 
 export const metadata: Metadata = {
   title: 'Api platform',
-  description: 'Created by Opentensor'
+  description: 'Created by Opentensor',
+  icons: '/favicon.ico'
 }
 
 export default function RootLayout({
@@ -24,7 +26,9 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning className={dmMono.className}>
       <body className="flex flex-col min-h-screen w-screen dark:bg-black px-8 pt-8">
-        <Themeprovider>{children}</Themeprovider>
+        <AuthProvider>
+          <Themeprovider>{children}</Themeprovider>
+        </AuthProvider>
       </body>
     </html>
   )

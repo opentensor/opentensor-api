@@ -2,7 +2,9 @@
 
 import { motion, useAnimationControls } from 'framer-motion'
 import Image from 'next/image'
-import { usePathname } from 'next/navigation'
+import Link from 'next/link'
+import { usePathname, useRouter } from 'next/navigation'
+import { signOut } from 'next-auth/react'
 import { useEffect, useMemo, useState } from 'react'
 import { BsBarChartFill, BsFillCreditCard2FrontFill, BsGear } from 'react-icons/bs'
 import { FaBug, FaKey } from 'react-icons/fa'
@@ -48,6 +50,7 @@ const Navigation = () => {
   const svgControls = useAnimationControls()
 
   const pathname = usePathname()
+  const router = useRouter()
 
   useEffect(() => {
     if (isOpen) {
@@ -61,6 +64,11 @@ const Navigation = () => {
 
   const handleOpenClose = () => {
     setIsOpen(!isOpen)
+  }
+
+  async function handleSignOut() {
+    const data = await signOut({ redirect: false, callbackUrl: '/' })
+    router.push(data.url)
   }
 
   const sideBarLinks = useMemo(
@@ -121,7 +129,9 @@ const Navigation = () => {
       >
         <div className="flex  flex-row w-full justify-between place-items-center ">
           <div className="dark:invert">
-            <Image src="/logo.svg" alt="brand-logo" width={50} height={40} />
+            <Link href={'/'}>
+              <Image src="/logo.svg" alt="brand-logo" width={50} height={40} />
+            </Link>
           </div>
           <button className="p-1 rounded-full flex dark:text-neutral-400" onClick={handleOpenClose}>
             <svg
@@ -164,9 +174,7 @@ const Navigation = () => {
         </div>
         <button
           className=" text-neutral-400 hover:text-white  px-3 ease-linear absolute bottom-24"
-          // onClick={() => {
-          //   signOut()
-          // }}
+          onClick={handleSignOut}
         >
           <FiLogOut size={20} />
         </button>
