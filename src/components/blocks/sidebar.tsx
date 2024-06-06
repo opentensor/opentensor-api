@@ -7,7 +7,7 @@ import { usePathname, useRouter } from 'next/navigation'
 import { signOut } from 'next-auth/react'
 import { useEffect, useMemo, useState } from 'react'
 import { BsBarChartFill, BsFillCreditCard2FrontFill, BsGear } from 'react-icons/bs'
-import { FaBug, FaKey } from 'react-icons/fa'
+import { FaKey } from 'react-icons/fa'
 import { FiLogOut } from 'react-icons/fi'
 import { IoDocumentTextSharp } from 'react-icons/io5'
 import { MdOutlineDashboard } from 'react-icons/md'
@@ -176,6 +176,7 @@ const Navigation = () => {
         <Link
           className={`text-neutral-400 hover:text-neutral-900 px-3 ease-linear  absolute bottom-24`}
           href={process.env.NEXT_PUBLIC_FEEDBACK_LINK!}
+          target="_blank"
         >
           <RiFeedbackLine size={18} />
         </Link>

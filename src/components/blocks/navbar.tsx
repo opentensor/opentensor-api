@@ -4,6 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import * as React from 'react'
 
+import { cn } from '@/_utils/cn'
 // import { Icons } from '@/components/icons'
 import {
   NavigationMenu,
@@ -15,7 +16,6 @@ import {
   navigationMenuTriggerStyle
 } from '@/components/ui/navigation-menu'
 import { ThemeToggle } from '@/components/ui/theme-toggle'
-import { cn } from '@/lib/utils'
 
 export function Navbar() {
   return (
