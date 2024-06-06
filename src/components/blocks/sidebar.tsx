@@ -11,6 +11,7 @@ import { FaBug, FaKey } from 'react-icons/fa'
 import { FiLogOut } from 'react-icons/fi'
 import { IoDocumentTextSharp } from 'react-icons/io5'
 import { MdOutlineDashboard } from 'react-icons/md'
+import { RiFeedbackLine } from 'react-icons/ri'
 
 import SidebarNavigation from '../ui/sidebar-navgation'
 import { ThemeToggle } from '../ui/theme-toggle'
@@ -97,23 +98,17 @@ const Navigation = () => {
         icon: IoDocumentTextSharp,
         target: '_blank'
       },
-      /*{
+      {
         name: 'Billing',
-        href: '#',
+        href: '/dashboard/billing',
         icon: BsFillCreditCard2FrontFill,
         active: pathname === '/dashboard/billing'
       },
       {
         name: 'Settings',
-        href: '#',
+        href: '/dashboard/settings',
         icon: BsGear,
         active: pathname === '/dashboard/settings'
-      },*/
-      {
-        name: 'Report Bugs',
-        href: '/dashboard/bugs',
-        icon: FaBug,
-        active: pathname === '/dashboard/bugs'
       }
     ],
     [pathname]
@@ -173,11 +168,17 @@ const Navigation = () => {
           </div>
         </div>
         <button
-          className=" text-neutral-400 hover:text-white  px-3 ease-linear absolute bottom-24"
+          className=" text-neutral-400 hover:text-neutral-900 px-3 ease-linear absolute bottom-36"
           onClick={handleSignOut}
         >
-          <FiLogOut size={20} />
+          <FiLogOut size={18} />
         </button>
+        <Link
+          className={`text-neutral-400 hover:text-neutral-900 px-3 ease-linear  absolute bottom-24`}
+          href={process.env.NEXT_PUBLIC_FEEDBACK_LINK!}
+        >
+          <RiFeedbackLine size={18} />
+        </Link>
       </motion.aside>
     </>
   )
