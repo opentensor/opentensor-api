@@ -26,9 +26,10 @@ export const authOptions = {
       if (db) {
         session.user.id = db.id
         session.user.name = db.name ?? ''
-        session.user.email = db.email ?? ''
+        session.user.email = db.email
         session.user.image = db.image ?? ''
         session.user.role = db.role ?? Role.USER
+        session.user.stripe_customer_id = db.stripe_customer_id ?? ''
       }
 
       return session

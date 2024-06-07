@@ -3,7 +3,7 @@ import { ThemeToggle } from '@/components/ui/theme-toggle'
 
 export default async function AuthLayout({ children }: { children: React.ReactNode }) {
   return (
-    <>
+    <div className="flex flex-col h-screen p-8">
       <div className="flex items-center justify-end">
         <ThemeToggle />
       </div>
@@ -11,6 +11,6 @@ export default async function AuthLayout({ children }: { children: React.ReactNo
         {children}
         <TermsFooter />
       </div>
-    </>
+    </div>
   )
 }

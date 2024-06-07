@@ -25,7 +25,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning className={dmMono.className}>
-      <body className="flex flex-col min-h-screen w-screen dark:bg-black px-8 pt-8">
+      <body className="min-h-screen w-screen dark:bg-black">
         <AuthProvider>
           <Themeprovider>{children}</Themeprovider>
         </AuthProvider>

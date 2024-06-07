@@ -90,6 +90,15 @@ model ApiKey {
   User            User  @relation(fields: [user_id], references: [id])
 }
 
+model Plan {
+  id                      String @id @default(cuid())
+  name                    String
+  description             String
+  stripe_price_monthly_id String
+  stripe_price_yearly_id  String
+  features                String
+}
+
 enum TIER {
   FREE
   PAID
