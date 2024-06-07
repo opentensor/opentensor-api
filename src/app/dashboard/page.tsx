@@ -4,7 +4,8 @@ import React from 'react'
 import toast, { Toaster } from 'react-hot-toast'
 
 import { useGlobalStore } from '@/_store/globalStore'
-import { OverviewCard } from '@/components/blocks/dashboard/overview'
+import { StatusOverview } from '@/components/blocks/dashboard/status'
+import { UsageOverview } from '@/components/blocks/dashboard/usage'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 
 function Page() {
@@ -31,6 +32,8 @@ function Page() {
 
     fetchData()
   }, [fetchAndSetApiLogsToState])
+
+  console.log({ session })
 
   return (
     <section className="flex flex-col gap-12 px-4 h-full w-full">
@@ -91,7 +94,7 @@ function Page() {
         </Card>
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Subscriptions</CardTitle>
+            <CardTitle className="text-sm">Subscriptions</CardTitle>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -114,12 +117,20 @@ function Page() {
         </Card>
       </div>
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-2">
-        <Card className="col-span-4">
+        <Card className="col-span-1">
           <CardHeader>
-            <CardTitle>Overview</CardTitle>
+            <CardTitle>Status</CardTitle>
           </CardHeader>
           <CardContent className="pl-2">
-            <OverviewCard />
+            <StatusOverview />
+          </CardContent>
+        </Card>
+        <Card className="col-span-1">
+          <CardHeader>
+            <CardTitle>Total Usage</CardTitle>
+          </CardHeader>
+          <CardContent className="pl-2">
+            <UsageOverview />
           </CardContent>
         </Card>
       </div>

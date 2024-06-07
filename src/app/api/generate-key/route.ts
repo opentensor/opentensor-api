@@ -1,10 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth'
 
+import { decryptApiKey, encryptApiKey, generateApiKeys } from '@/_utils/apiKey'
 import { authOptions } from '@/lib/auth/options'
 import { prisma } from '@/lib/database'
-
-import { decryptApiKey, encryptApiKey, generateApiKeys } from '../../../_utils/apiKey'
 
 export async function POST(request: NextRequest) {
   const session = await getServerSession(authOptions)

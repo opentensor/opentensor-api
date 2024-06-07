@@ -46,7 +46,8 @@ export const authOptions = {
           image: profile.picture,
           role: profile.role
         }
-      }
+      },
+      allowDangerousEmailAccountLinking: true
     }),
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
@@ -59,7 +60,8 @@ export const authOptions = {
           image: profile.picture,
           role: profile.role
         }
-      }
+      },
+      allowDangerousEmailAccountLinking: true //TODO:change this is handle error if user has already an account with same email but different provider
     }),
     EmailProvider({
       async sendVerificationRequest({ identifier: email, url, provider: { server, from } }) {

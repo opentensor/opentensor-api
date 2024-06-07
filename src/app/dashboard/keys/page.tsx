@@ -9,6 +9,8 @@ import { ApiKey } from '@/_store/api/types'
 import { useGlobalStore } from '@/_store/globalStore'
 import { Button } from '@/components/ui/button'
 
+import { Modal } from './components/Modal'
+
 function Page() {
   const [showModal, setShowModal] = React.useState(false)
   const [loading, setLoading] = React.useState(false)
@@ -55,12 +57,7 @@ function Page() {
           </div>
         </div>
         <div className="flex items-start py-4">
-          <Button
-          // className="dark:invert bg-gradient-to-b border  hover:bg-gradient-to-b from-neutral-700   text-neutral-400  border-slate-500 hover:text-white py-3 px-6 rounded-md transition duration-300"
-          // onClick={() => setShowModal(true)}
-          >
-            Generate Key
-          </Button>
+          <Modal />
         </div>
       </div>
       <div className="flex w-full border border-slate-500 rounded-md">
@@ -97,7 +94,7 @@ function Page() {
                   <td className="py-2 px-8">{key.name}</td>
                   <td className="py-2 px-8">{key.key}</td>
                   <td className="py-2 px-8">{key.max_usage_limit - key.usage}</td>
-                  <td className="py-2 px-8">{created(key.createdAt)}</td>
+                  <td className="py-2 px-8">{created(key.created_at)}</td>
                   <td className="flex gap-3 p-5 items-center justify-between ">
                     <MdContentCopy size={20} className="cursor-pointer " />
                     <MdDelete size={20} className="cursor-pointer " onClick={() => deleteKey(key)} />

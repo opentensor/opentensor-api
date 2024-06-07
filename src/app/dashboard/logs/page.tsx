@@ -23,7 +23,6 @@ function Page() {
   React.useEffect(() => {
     try {
       setLoading(true)
-
       fetchAndSetApiLogsToState()
     } catch (error) {
       console.log(error)
