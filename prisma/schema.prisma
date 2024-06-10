@@ -13,6 +13,8 @@ model User {
   email         String          @unique
   emailVerified DateTime?
   image         String?
+  username         String?
+  onboarded     Boolean?  @default(false)  
   accounts      Account[]
   sessions      Session[]
   api_keys      ApiKey[]
@@ -90,14 +92,6 @@ model ApiKey {
   User            User  @relation(fields: [user_id], references: [id])
 }
 
-model Plan {
-  id                      String @id @default(cuid())
-  name                    String
-  description             String
-  stripe_price_monthly_id String
-  stripe_price_yearly_id  String
-  features                String
-}
 
 enum TIER {
   FREE

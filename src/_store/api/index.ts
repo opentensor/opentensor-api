@@ -5,6 +5,7 @@ import { withAsync } from '@/_utils/withAsync'
 import { CombinedSlices } from '../types'
 import { createNewApiKey, deleteKey, getAllApiKeysOfUser, getAllApiLogsOfUser } from './actions'
 import { ApiSlice, ApiState } from './types'
+import toast from 'react-hot-toast'
 
 const initialApiState: ApiState = {
   status: 'IDLE',
@@ -49,12 +50,15 @@ const createApiSlice: StateCreator<CombinedSlices, [['zustand/immer', never], ne
           state.apiState.error = response?.error || 'Something went wrong.'
           state.apiState.status = 'ERROR'
         })
+        toast.error(`Failed. ${error || response.error}`, { position: 'top-right' })
       }
 
       if (response && response.success) {
         set((state) => {
           state.apiState.apiKeys.push(response.data)
           state.apiState.status = 'SUCCESS'
+
+          toast.success(`API key created successfully`, { position: 'top-right' })
         })
       }
     },

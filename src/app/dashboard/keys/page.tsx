@@ -7,16 +7,14 @@ import { MdContentCopy, MdDelete } from 'react-icons/md'
 
 import { ApiKey } from '@/_store/api/types'
 import { useGlobalStore } from '@/_store/globalStore'
-import { Button } from '@/components/ui/button'
 
 import { Modal } from './components/Modal'
+import { SkeletonLoader } from './components/SkeletonLoader'
 
 function Page() {
-  const [showModal, setShowModal] = React.useState(false)
-  const [loading, setLoading] = React.useState(false)
-
-  const [apiKeys, fetchAndSetApiKeysToState, deleteApiKey] = useGlobalStore((state) => [
+  const [apiKeys, status, fetchAndSetApiKeysToState, deleteApiKey] = useGlobalStore((state) => [
     state.apiState.apiKeys,
+    state.apiState.status,
     state.apiActions.fetchAndSetApiKeysToState,
     state.apiActions.deleteApiKey
   ])
@@ -28,14 +26,11 @@ function Page() {
 
   React.useEffect(() => {
     try {
-      setLoading(true)
       fetchAndSetApiKeysToState()
     } catch (error) {
       console.log(error)
-
       toast.error('Failed to fetch keys. Please try again.', { position: 'top-right' })
     }
-    setLoading(false)
   }, [])
 
   async function deleteKey(key: ApiKey) {
@@ -71,12 +66,11 @@ function Page() {
               <th className="py-2 px-8 text-left font-medium w-[10%]"></th>
             </tr>
           </thead>
-          {loading ? (
+          {status === 'IDLE' || status === 'PENDING' ? (
             <tbody>
               <tr>
-                {/* TODO:replace with skeleton loader*/}
-                <td colSpan={4} className="py-6 px-8">
-                  Please wait ....
+                <td colSpan={5} className="py-6 px-8">
+                  <SkeletonLoader />
                 </td>
               </tr>
             </tbody>

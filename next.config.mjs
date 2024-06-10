@@ -2,8 +2,9 @@
 const nextConfig = {
   pageExtensions: ['ts', 'tsx', 'js', 'jsx'],
   experimental: {
-    serverActions: true,
+    serverActions: true
   },
-};
+  reactStrictMode: false
+}
 
-export default nextConfig;
+export default nextConfig

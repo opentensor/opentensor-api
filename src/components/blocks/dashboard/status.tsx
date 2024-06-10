@@ -35,6 +35,7 @@ export function StatusOverview() {
     fetchData()
   }, [fetchAndSetApiLogsToState])
 
+  //TODO:move this to global state
   const transformedData: TransformedData[] = Object.values(
     apiLogs.reduce<Record<string, TransformedData>>((acc, log) => {
       const endpoint = log.endpoint

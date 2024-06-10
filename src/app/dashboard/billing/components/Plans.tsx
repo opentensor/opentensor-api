@@ -1,69 +1,108 @@
 'use client'
-import Link from 'next/link'
+
+import { useSearchParams } from 'next/navigation'
+import { useSession } from 'next-auth/react'
 import React from 'react'
+import toast, { Toaster } from 'react-hot-toast'
 
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
+import { createCheckoutSession, getUserSubscriptions } from '@/lib/stripe/billing'
+import { Separator } from '@/components/ui/separator'
 
-interface Plan {
+export interface Plan {
   name: string
   price: string
   description: string
   link?: string
+  features: any
+  priceId?: string
 }
 
 const plans: Plan[] = [
-  { name: 'FREE', price: '$0/month', description: 'Basic features', link: '#' },
+  {
+    name: 'FREE',
+    price: '0',
+    description: 'Basic features',
+    features: ['2 API Keys', '1,000 requests per key']
+  },
   {
     name: 'Monthly',
-    price: `$${process.env.NEXT_PUBLIC_MONTHLY_SUB_AMOUNT}/month`,
+    price: process.env.NEXT_PUBLIC_MONTHLY_SUB_AMOUNT!,
     description: 'Standard features',
-    link: `${process.env.NEXT_PUBLIC_MONTHLY_SUB_LINK}`
+    priceId: process.env.NEXT_PUBLIC_MONTHLY!,
+    features: ['10 API Keys', '10,000 requests per key']
   },
   {
     name: 'Yearly',
-    price: `$${process.env.NEXT_PUBLIC_YEARLY_SUB_AMOUNT}/year`,
+    price: process.env.NEXT_PUBLIC_YEARLY_SUB_AMOUNT!,
     description: 'Standard features with yearly discount',
-    link: `${process.env.NEXT_PUBLIC_YEARLY_SUB_LINK}`
+    priceId: process.env.NEXT_PUBLIC_YEARLY!,
+    features: ['Unlimited Keys', '100,000 requests per key']
   }
 ]
 
 function Plans() {
+  const query = useSearchParams()
+  const { data: session } = useSession()
+
   const [selectedPlan, setSelectedPlan] = React.useState<Plan>(plans[0])
 
+  React.useEffect(() => {
+    if (query?.get('session_id')) {
+      toast.success('Subscription successful.')
+    }
+  }, [])
+
+  async function handleSubscribe() {
+    try {
+      const { url }: any = await createCheckoutSession(selectedPlan)
+      window.location.assign(url as string)
+    } catch (error) {
+      console.log(error)
+      toast.error('Subscription failed. Please try again.')
+    }
+  }
+
   return (
-    <div>
-      <h2 className="text-xl font-semibold">Selected Plan</h2>
+    <div className="py-6">
       {plans.map((plan) => (
-        <div key={plan.name} className="mb-4">
-          <Card className="mb-8 pt-4 w-96 items-center justify-between gap-3 flex">
-            <CardContent>
+        <div key={plan.name}>
+          <Card className="overflow-hidden relative mb-8 pt-4 items-center justify-between gap-3 flex">
+            <CardContent className="flex justify-between w-full gap-3">
               <RadioGroup
                 value={selectedPlan.name}
                 onValueChange={() => setSelectedPlan(plan)}
                 name="plans"
-                className="flex items-center"
+                className="flex items-center flex-1"
               >
                 <RadioGroupItem value={plan.name} />
                 <div className="ml-4">
-                  {/* <CardHeader></CardHeader> */}
                   <h3 className="text-lg font-semibold">{plan.name}</h3>
-                  <p>{plan.price}</p>
+                  <p>{`$${plan.price}`}</p>
                   <p className="text-sm text-gray-500">{plan.description}</p>
                 </div>
-                <div className={`${plan.name === 'FREE' ? 'hidden' : 'block'}`}>
-                  <Button disabled={selectedPlan.name != plan.name ? true : false}>
-                    <Link href={plan.link!} target="_blank">
-                      Subscribe
-                    </Link>
-                  </Button>
-                </div>
               </RadioGroup>
+              <Separator orientation="vertical" className="h-[current]" />
+              <div className="flex-1 font-light text-sm tracking-wide ml-3">
+                {plan.features.map((feature: string, idx: number) => (
+                  <li className="list-item" key={idx + 1}>
+                    {feature}
+                  </li>
+                ))}
+              </div>
             </CardContent>
+            {/* <div className="absolute top-6 right-[-56px] bg-black text-white text-xs font-bold py-1 px-20 transform rotate-[30deg]">
+              Active
+            </div> */}
           </Card>
         </div>
       ))}
+      <Button disabled={selectedPlan.name === 'FREE'} onClick={handleSubscribe}>
+        Subscribe
+      </Button>
+      <Toaster position="top-right" />
     </div>
   )
 }
