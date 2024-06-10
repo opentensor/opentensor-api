@@ -55,14 +55,8 @@ export function StatusOverview() {
   return (
     <ResponsiveContainer width="100%" height={420}>
       <BarChart data={transformedData}>
-        <XAxis dataKey="endpoint" stroke="#888888" fontSize={12} tickLine={false} axisLine={false} />
-        <YAxis
-          stroke="#888888"
-          fontSize={12}
-          tickLine={false}
-          axisLine={false}
-          tickFormatter={(value: number) => value.toFixed(0)}
-        />
+        <XAxis dataKey="endpoint" fontSize={12} tickLine={false} axisLine={false} />
+        <YAxis fontSize={12} tickLine={false} axisLine={false} tickFormatter={(value: number) => value.toFixed(0)} />
         {/* <CartesianGrid strokeDasharray="1 1" /> */}
         <Tooltip />
         <Legend />

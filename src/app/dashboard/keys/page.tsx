@@ -10,6 +10,7 @@ import { useGlobalStore } from '@/_store/globalStore'
 
 import { Modal } from './components/Modal'
 import { SkeletonLoader } from './components/SkeletonLoader'
+import { copyToClipboard } from '@/_utils/helpers'
 
 function Page() {
   const [apiKeys, status, fetchAndSetApiKeysToState, deleteApiKey] = useGlobalStore((state) => [
@@ -35,6 +36,7 @@ function Page() {
 
   async function deleteKey(key: ApiKey) {
     await deleteApiKey(key)
+    toast.error('Api key deleted', { position: 'top-right' })
   }
 
   return (
@@ -90,7 +92,7 @@ function Page() {
                   <td className="py-2 px-8">{key.max_usage_limit - key.usage}</td>
                   <td className="py-2 px-8">{created(key.created_at)}</td>
                   <td className="flex gap-3 p-5 items-center justify-between ">
-                    <MdContentCopy size={20} className="cursor-pointer " />
+                    <MdContentCopy size={20} className="cursor-pointer " onClick={() => copyToClipboard(key.key)} />
                     <MdDelete size={20} className="cursor-pointer " onClick={() => deleteKey(key)} />
                   </td>
                 </tr>

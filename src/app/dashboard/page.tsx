@@ -16,6 +16,7 @@ function Page() {
   ])
 
   const { data: session } = useSession()
+
   const today = getTodayDate()
 
   React.useEffect(() => {
@@ -65,7 +66,7 @@ function Page() {
         </Card>
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm">Requests per Day</CardTitle>
+            <CardTitle className="text-sm">Requests today</CardTitle>
 
             <svg
               className="h-4 w-4 text-muted-foreground"
@@ -89,7 +90,8 @@ function Page() {
             {/* <p className="text-xs text-muted-foreground">+20.1% from last month</p> */}
           </CardContent>
         </Card>
-        <Card>
+
+        {/* <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm">Subscription Tier</CardTitle>
             <svg
@@ -109,9 +111,9 @@ function Page() {
           </CardHeader>
           <CardContent>
             <div className="text-2xl ">Basic</div>
-            {/* <p className="text-xs text-muted-foreground">+180.1% from last month</p> */}
+            <p className="text-xs text-muted-foreground">+180.1% from last month</p>
           </CardContent>
-        </Card>
+        </Card> */}
       </div>
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-2">
         <Card className="col-span-1">

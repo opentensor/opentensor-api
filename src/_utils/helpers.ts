@@ -1,5 +1,6 @@
-import { ApiLog } from '@/_store/api/types'
+import { ApiLog, StripePlan } from '@/_store/api/types'
 import { prisma } from '@/lib/database'
+import toast from 'react-hot-toast'
 
 export function extractDate(timestamp: string) {
   return timestamp.split('T')[0]
@@ -42,31 +43,6 @@ export function getTodayDate() {
   return `${year}-${month}-${day}`
 }
 
-type StripePlan = {
-  plans: {
-    active: boolean
-    aggregate_usage: string | null
-    amount: number
-    amount_decimal: string
-    billing_scheme: string
-    created: number
-    currency: string
-    id: string
-    interval: string
-    interval_count: number
-    livemode: boolean
-    metadata: Record<string, string>
-    meter: string | null
-    nickname: string | null
-    object: string
-    product: string
-    tiers_mode: string | null
-    transform_usage: string | null
-    trial_period_days: number | null
-    usage_type: string
-  }
-}
-
 export function findActivePlan(plansArray: StripePlan[]): string | boolean {
   let hasYear = false
   let hasMonth = false
@@ -96,4 +72,17 @@ export async function getCusId(email: string) {
     where: { email: String(email) }
   })
   return user?.stripe_customer_id
+}
+
+export function copyToClipboard(text: string) {
+  navigator.clipboard
+    .writeText(text)
+    .then(() => {
+      toast.success('copied to clipboard', { position: 'top-right' })
+      console.log(`${text} copied to clipboard`)
+    })
+    .catch((err) => {
+      toast.error(`Failed to copy text: ${err} `, { position: 'top-right' })
+      console.error('Failed to copy text: ', err)
+    })
 }

@@ -66,10 +66,12 @@ function Plans() {
   }
 
   return (
-    <div className="py-6">
+    <div className="py-6 space-y-8 w-2/3">
       {plans.map((plan) => (
         <div key={plan.name}>
-          <Card className="overflow-hidden relative mb-8 pt-4 items-center justify-between gap-3 flex">
+          <Card
+            className={`overflow-hidden relative mb-8 pt-4 items-center justify-between gap-3 flex ${selectedPlan.name === plan.name ? 'border-slate-500' : ''}`}
+          >
             <CardContent className="flex justify-between w-full gap-3">
               <RadioGroup
                 value={selectedPlan.name}
@@ -79,7 +81,7 @@ function Plans() {
               >
                 <RadioGroupItem value={plan.name} />
                 <div className="ml-4">
-                  <h3 className="text-lg font-semibold">{plan.name}</h3>
+                  <h3 className="text-lg">{plan.name}</h3>
                   <p>{`$${plan.price}`}</p>
                   <p className="text-sm text-gray-500">{plan.description}</p>
                 </div>
