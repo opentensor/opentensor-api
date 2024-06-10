@@ -26,7 +26,7 @@ export async function POST(request: NextRequest) {
 
   if (user.stripe_customer_id) {
     const activePlans = await getUserSubscriptions(user.stripe_customer_id)
-    //TODO: Make sure to allow to subscribe only one plan??
+
     highestActivePlan = findActivePlan(activePlans.results)
   }
 

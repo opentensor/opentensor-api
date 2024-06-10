@@ -102,7 +102,7 @@ function Plans() {
         </div>
       ))}
       <Button disabled={selectedPlan.name === 'FREE'} onClick={handleSubscribe}>
-        Subscribe
+        Manage
       </Button>
       <Toaster position="top-right" />
     </div>

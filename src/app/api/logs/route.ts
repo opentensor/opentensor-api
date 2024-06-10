@@ -26,18 +26,6 @@ export async function GET() {
     take: 10
   })
 
-  //TODO:may not need this
-  // apiLogs = apiLogs.map((apiLog) => {
-  //   apiKeys.map((apiKey) => {
-  //     if (apiKey.key_hashed === apiLog.key_hashed) {
-  //       const decrypted = decryptApiKey(apiKey.key, apiKey.iv, apiKey.key_tag)
-  //       // key is not a field in the ApiLog table in the DB so the next line throws a Typescript error
-
-  //       apiLog.key = decrypted ?? ''
-  //     }
-  //   })
-  //   return apiLog
-  // })
 
   return NextResponse.json({ success: true, data: apiLogs }, { status: 200 })
 }

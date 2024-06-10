@@ -39,24 +39,38 @@ export async function createCheckoutSession(data: Plan) {
     customerId = session.user.stripe_customer_id
   }
 
-  const checkoutSession: Stripe.Checkout.Session = await stripe.checkout.sessions.create({
-    customer: session.user.stripe_customer_id,
-    mode: 'subscription',
-    line_items: [
-      {
-        quantity: 1,
-        price: data.priceId
-      }
-    ],
+  // const checkoutSession: Stripe.Checkout.Session = await stripe.checkout.sessions.create({
+  //   customer: session.user.stripe_customer_id,
+  //   mode: 'subscription',
+  //   line_items: [
+  //     {
+  //       quantity: 1,
+  //       price: data.priceId
+  //     }
+  //   ],
 
-    success_url: `${origin}/dashboard/billing/?session_id={CHECKOUT_SESSION_ID}`,
-    cancel_url: `${origin}/dashboard/billing`
+  //   success_url: `${origin}/dashboard/billing/?session_id={CHECKOUT_SESSION_ID}`,
+  //   cancel_url: `${origin}/dashboard/billing`
+  // })
+
+  // return {
+  //   client_secret: checkoutSession.client_secret,
+  //   url: checkoutSession.url
+  // }
+  const portal = await stripe.billingPortal.sessions.create({
+    customer: session.user.stripe_customer_id!,
+    return_url: process.env.NEXTAUTH_URL + '/dashboard/billing'
   })
+  console.log({ portal })
+  return { url: portal.url }
+}
 
-  return {
-    client_secret: checkoutSession.client_secret,
-    url: checkoutSession.url
-  }
+export async function getCustomerPortalLink(customer_id: string) {
+  const portal = await stripe.billingPortal.sessions.create({
+    customer: customer_id,
+    return_url: process.env.NEXTAUTH_URL + '/dashboard/billing'
+  })
+  return portal.url
 }
 
 export async function createPaymentIntent(data: Plan): Promise<{ client_secret: string }> {

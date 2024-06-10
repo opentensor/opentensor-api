@@ -35,9 +35,10 @@ const accountFormSchema = z.object({
     .max(30, {
       message: 'Name must not be longer than 30 characters.'
     }),
-  dob: z.date({
-    required_error: 'A date of birth is required.'
-  })
+  email: z.string()
+  // dob: z.date({
+  //   required_error: 'A date of birth is required.'
+  // })
 })
 
 type AccountFormValues = z.infer<typeof accountFormSchema>
@@ -49,7 +50,8 @@ export function AccountForm() {
   const defaultValues: Partial<AccountFormValues> = {
     name: session?.user.name,
     username: session?.user.username,
-    dob: new Date('2023-01-23')
+    // dob: new Date('2023-01-23'),
+    email: session?.user.email
   }
   const form = useForm<AccountFormValues>({
     resolver: zodResolver(accountFormSchema),
@@ -111,6 +113,21 @@ export function AccountForm() {
         />
         <FormField
           control={form.control}
+          name="email"
+          disabled
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Email</FormLabel>
+              <FormControl>
+                <Input placeholder="email" {...field} />
+              </FormControl>
+              <FormDescription>This is the email that will be displayed on your profile.</FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        {/* <FormField
+          control={form.control}
           name="dob"
           render={({ field }) => (
             <FormItem className="flex flex-col">
@@ -142,7 +159,7 @@ export function AccountForm() {
               <FormMessage />
             </FormItem>
           )}
-        />
+        /> */}
         {/* <FormField
           control={form.control}
           name="language"
