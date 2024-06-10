@@ -79,7 +79,6 @@ export function copyToClipboard(text: string) {
     .writeText(text)
     .then(() => {
       toast.success('copied to clipboard', { position: 'top-right' })
-      console.log(`${text} copied to clipboard`)
     })
     .catch((err) => {
       toast.error(`Failed to copy text: ${err} `, { position: 'top-right' })
