@@ -14,7 +14,8 @@ model User {
   emailVerified DateTime?
   image         String?
   username         String?
-  onboarded     Boolean?  @default(false)  
+  onboarded     Boolean?  @default(false) 
+  dob           String? 
   accounts      Account[]
   sessions      Session[]
   api_keys      ApiKey[]
@@ -90,6 +91,13 @@ model ApiKey {
   key_tag         String   @unique
   tier            TIER @default(FREE)
   User            User  @relation(fields: [user_id], references: [id])
+}
+
+model ContactForm {
+  id      String @id @default(cuid())
+  name    String
+  email   String
+  message String
 }
 
 

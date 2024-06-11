@@ -10,7 +10,7 @@ import { useForm } from 'react-hook-form'
 import toast, { Toaster } from 'react-hot-toast'
 import { z } from 'zod'
 
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui//form'
+import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { Button } from '@/components/ui/button'
 
 import { Input } from '@/components/ui/input'
