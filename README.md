@@ -68,9 +68,9 @@ Connect your domain, and replace the email in `src/lib/email/mailer.ts` file.
 2. Create your Github Auth Credentials here:
    https://github.com/settings/developers
 
-`GITHUB_CLIENT_ID:`
+   `GITHUB_CLIENT_ID:`
 
-`GITHUB_CLIENT_SECRET:`
+   `GITHUB_CLIENT_SECRET:`
 
 3. `NEXTAUTH_URL='http://localhost:3000'` for development
    for production, replace this with your website url
