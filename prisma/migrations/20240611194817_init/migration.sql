@@ -11,6 +11,9 @@ CREATE TABLE "User" (
     "email" TEXT NOT NULL,
     "emailVerified" TIMESTAMP(3),
     "image" TEXT,
+    "username" TEXT,
+    "onboarded" BOOLEAN DEFAULT false,
+    "dob" TEXT,
     "stripe_customer_id" TEXT,
     "stripe_subscription_item" TEXT,
     "role" "Role" NOT NULL DEFAULT 'USER',
@@ -22,6 +25,7 @@ CREATE TABLE "User" (
 
 -- CreateTable
 CREATE TABLE "Account" (
+    "id" TEXT NOT NULL,
     "userId" TEXT NOT NULL,
     "type" TEXT NOT NULL,
     "provider" TEXT NOT NULL,
@@ -36,16 +40,19 @@ CREATE TABLE "Account" (
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
-    CONSTRAINT "Account_pkey" PRIMARY KEY ("provider","providerAccountId")
+    CONSTRAINT "Account_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "Session" (
+    "id" TEXT NOT NULL,
     "sessionToken" TEXT NOT NULL,
     "userId" TEXT NOT NULL,
     "expires" TIMESTAMP(3) NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "Session_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -88,8 +95,28 @@ CREATE TABLE "ApiKey" (
     CONSTRAINT "ApiKey_pkey" PRIMARY KEY ("id")
 );
 
+-- CreateTable
+CREATE TABLE "ComputeJobs" (
+    "email" TEXT NOT NULL,
+    "jobId" TEXT NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL
+);
+
+-- CreateTable
+CREATE TABLE "ContactForm" (
+    "id" TEXT NOT NULL,
+    "name" TEXT NOT NULL,
+    "email" TEXT NOT NULL,
+    "message" TEXT NOT NULL,
+
+    CONSTRAINT "ContactForm_pkey" PRIMARY KEY ("id")
+);
+
 -- CreateIndex
 CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Account_provider_providerAccountId_key" ON "Account"("provider", "providerAccountId");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Session_sessionToken_key" ON "Session"("sessionToken");
@@ -105,6 +132,9 @@ CREATE UNIQUE INDEX "ApiKey_key_hashed_key" ON "ApiKey"("key_hashed");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "ApiKey_key_tag_key" ON "ApiKey"("key_tag");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "ComputeJobs_jobId_key" ON "ComputeJobs"("jobId");
 
 -- AddForeignKey
 ALTER TABLE "Account" ADD CONSTRAINT "Account_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
