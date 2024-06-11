@@ -49,6 +49,7 @@ Get your stripe keys: https://stripe.com/docs/keys
 ### Email
 
 `RESEND_SECRET:`
+
 `RESEND_DOMAIN: your custom domain or 'resend.dev' `
 
 Create a free Resend account and paste in your API key: https://resend.com
@@ -61,28 +62,35 @@ Connect your domain, and replace the email in `src/lib/email/mailer.ts` file.
    https://console.cloud.google.com/apis/
 
    `GOOGLE_CLIENT_ID:`
+
    `GOOGLE_CLIENT_SECRET:`
 
 2. Create your Github Auth Credentials here:
    https://github.com/settings/developers
 
 `GITHUB_CLIENT_ID:`
+
 `GITHUB_CLIENT_SECRET:`
 
 3. `NEXTAUTH_URL='http://localhost:3000'` for development
    for production, replace this with your website url
+
    `NEXTAUTH_SECRET:` A random string is used to hash tokens, sign/encrypt cookies and generate cryptographic keys.
 
 ### Vision(SN19)
 
 Modify these to set your own validator url and key
+
 `VISION_KEY_OTF_VALIDATOR:`
+
 `VISION_URL_OTF_VALIDATOR:`
 
 ### Niche(SN23)
 
 Modify these to set your own validator url and key
+
 `NICHE_KEY_OTF_VALIDATOR:`
+
 `NICHE_URL_OTF_VALIDATOR:`
 
 ## 3. Install
