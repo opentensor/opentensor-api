@@ -14,7 +14,7 @@ NOTE: At present, you have to manually configure your own validator to route the
 
 ## Deploy
 
-We use vercel for deployment: https://staging-apis-platform.vercel.app/
+We use vercel for deployment: https://opentensor-paas-template.vercel.app/
 
 ## API Usage
 

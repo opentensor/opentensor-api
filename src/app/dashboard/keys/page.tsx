@@ -36,7 +36,7 @@ function Page() {
 
   async function deleteKey(key: ApiKey) {
     await deleteApiKey(key)
-    toast.error('Api key deleted', { position: 'top-right' })
+    toast.success('Api key deleted', { position: 'top-right' })
   }
 
   return (
