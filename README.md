@@ -1,6 +1,6 @@
 # opentensor-api
 
-This repository is designed to provide simple and easy-to-use templates for validators which enables:
+This repository is designed to provide simple and easy-to-use templates (PAaS -- Product As a Service) for validators which enables:
 
 - API endpoints to Bittensor subnet services and digital commodities
 
