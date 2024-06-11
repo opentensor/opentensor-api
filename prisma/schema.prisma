@@ -93,6 +93,12 @@ model ApiKey {
   User            User  @relation(fields: [user_id], references: [id])
 }
 
+model ComputeJobs {
+  email     String
+  jobId     String   @unique
+  createdAt DateTime
+}
+
 model ContactForm {
   id      String @id @default(cuid())
   name    String

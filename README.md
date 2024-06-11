@@ -77,6 +77,8 @@ Connect your domain, and replace the email in `src/lib/email/mailer.ts` file.
 
    `NEXTAUTH_SECRET:` A random string is used to hash tokens, sign/encrypt cookies and generate cryptographic keys.
 
+   `APIKEY_ENCRYPT_KEY:`
+
 ### Vision(SN19)
 
 Modify these to set your own validator url and key
@@ -92,6 +94,8 @@ Modify these to set your own validator url and key
 `NICHE_KEY_OTF_VALIDATOR:`
 
 `NICHE_URL_OTF_VALIDATOR:`
+
+NOTE:
 
 ## 3. Install
 
