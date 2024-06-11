@@ -95,10 +95,10 @@ function Page() {
               animate="visible"
               variants={successVariants}
               transition={{ duration: 0.5 }}
-              className="text-center dark:invert"
+              className="text-center"
             >
               <h2 className="text-2xl">Thank You!</h2>
-              <p className="mt-4">Your message has been successfully sent. We will contact you soon.</p>
+              <p className="mt-4 font-light">Your message has been successfully sent. We will contact you soon.</p>
             </motion.div>
           ) : (
             <div className="flex flex-col justify-center items-center gap-16 h-full w-full">
