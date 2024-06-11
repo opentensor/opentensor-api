@@ -1,6 +1,6 @@
 import { ReloadIcon } from '@radix-ui/react-icons'
 import React from 'react'
-import toast, { Toaster } from 'react-hot-toast'
+import { Toaster } from 'react-hot-toast'
 
 import { useGlobalStore } from '@/_store/globalStore'
 import {
@@ -24,7 +24,6 @@ export function Modal() {
     state.apiActions.createNewApiKey
   ])
   const [name, setName] = React.useState('')
-
 
   async function submitHandler() {
     if (!name) return

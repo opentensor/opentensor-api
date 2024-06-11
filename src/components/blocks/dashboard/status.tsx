@@ -1,8 +1,8 @@
 'use client'
 
 import React from 'react'
-import toast, { Toaster } from 'react-hot-toast'
-import { Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
+import toast from 'react-hot-toast'
+import { Bar, BarChart, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
 
 import { useGlobalStore } from '@/_store/globalStore'
 

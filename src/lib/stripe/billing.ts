@@ -61,7 +61,7 @@ export async function createCheckoutSession(data: Plan) {
     customer: session.user.stripe_customer_id!,
     return_url: process.env.NEXTAUTH_URL + '/dashboard/billing'
   })
-  console.log({ portal })
+
   return { url: portal.url }
 }
 

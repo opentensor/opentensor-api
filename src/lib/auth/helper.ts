@@ -10,9 +10,5 @@ export async function getSignedInUser() {
     redirect('/auth/login')
   }
 
-  //   if (session.user.onboarded == false) {
-  //     redirect('/auth/setup-account')
-  //   }
-
   return session
 }

@@ -1,14 +1,12 @@
 'use client'
 
-import { useSearchParams } from 'next/navigation'
-import { useSession } from 'next-auth/react'
 import React from 'react'
 import toast, { Toaster } from 'react-hot-toast'
 
 import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardHeader } from '@/components/ui/card'
+import { Card, CardContent } from '@/components/ui/card'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
-import { createCheckoutSession, getUserSubscriptions } from '@/lib/stripe/billing'
+import { createCheckoutSession } from '@/lib/stripe/billing'
 import { Separator } from '@/components/ui/separator'
 
 export interface Plan {
@@ -44,16 +42,7 @@ const plans: Plan[] = [
 ]
 
 function Plans() {
-  const query = useSearchParams()
-  const { data: session } = useSession()
-
   const [selectedPlan, setSelectedPlan] = React.useState<Plan>(plans[0])
-
-  React.useEffect(() => {
-    if (query?.get('session_id')) {
-      toast.success('Subscription successful.')
-    }
-  }, [])
 
   async function handleSubscribe() {
     try {

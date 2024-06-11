@@ -22,7 +22,7 @@ export async function POST(request: NextRequest) {
     }
   })
 
-  console.log(apiKey)
+ 
 
   if (!apiKey) return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 })
 

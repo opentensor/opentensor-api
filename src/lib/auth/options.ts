@@ -7,7 +7,6 @@ import GoogleProvider from 'next-auth/providers/google'
 
 import { prisma } from '../database'
 import { sendMagicLinkEmail } from '../email/mailer'
-import { stripe } from '../stripe/helper'
 
 export const authOptions = {
   debug: true,
