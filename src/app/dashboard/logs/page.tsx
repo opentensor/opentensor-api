@@ -5,12 +5,12 @@ import toast, { Toaster } from 'react-hot-toast'
 import { BsBarChartFill } from 'react-icons/bs'
 
 import { useGlobalStore } from '@/_store/globalStore'
+import { SkeletonLoader } from './components/SkeletonLoader'
 
 function Page() {
-  const [loading, setLoading] = React.useState(false)
-
-  const [apiLogs, fetchAndSetApiLogsToState] = useGlobalStore((state) => [
+  const [apiLogs, status, fetchAndSetApiLogsToState] = useGlobalStore((state) => [
     state.apiState.apiLogs,
+    state.apiState.status,
     state.apiActions.fetchAndSetApiLogsToState
   ])
 
@@ -22,14 +22,12 @@ function Page() {
 
   React.useEffect(() => {
     try {
-      setLoading(true)
       fetchAndSetApiLogsToState()
     } catch (error) {
       console.log(error)
 
       toast.error('Failed to fetch logs. Please try again.', { position: 'top-right' })
     }
-    setLoading(false)
   }, [])
 
   return (
@@ -54,12 +52,11 @@ function Page() {
               <th className="py-2 px-8 text-left font-normal w-[20%]">Created</th>
             </tr>
           </thead>
-          {loading ? (
+          {status === 'IDLE' || status === 'PENDING' ? (
             <tbody>
               <tr>
-                {/* TODO:replace with skeleton loader*/}
                 <td colSpan={4} className="py-6 px-8">
-                  Loading...
+                  <SkeletonLoader />
                 </td>
               </tr>
             </tbody>

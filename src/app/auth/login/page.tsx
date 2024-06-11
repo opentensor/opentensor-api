@@ -43,7 +43,7 @@ function Login() {
   }
   return (
     <div className="flex flex-col justify-center items-center h-full gap-4 lg:w-[30%] md:w-[40%] xl:w-[22%]">
-      <Link href={'/'} className="my-8">
+      <Link href={'/'} className="h-[120px]">
         <Image src={'/logo.svg'} width={72} height={70} alt="brand-logo" className="dark:invert" />
       </Link>
       <div className=" flex flex-col gap-12">

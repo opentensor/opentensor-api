@@ -7,9 +7,9 @@ import { useGlobalStore } from '@/_store/globalStore'
 import { StatusOverview } from '@/components/blocks/dashboard/status'
 import { UsageOverview } from '@/components/blocks/dashboard/usage'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { countRequestsToday, getTodayDate, totalRequests } from '@/_utils/helpers'
 
 function Page() {
-  const [loading, setLoading] = React.useState(false)
   const [apiLogs, fetchAndSetApiLogsToState] = useGlobalStore((state) => [
     state.apiState.apiLogs,
     state.apiActions.fetchAndSetApiLogsToState
@@ -17,23 +17,21 @@ function Page() {
 
   const { data: session } = useSession()
 
+  const today = getTodayDate()
+
   React.useEffect(() => {
     const fetchData = async () => {
       try {
-        setLoading(true)
         await fetchAndSetApiLogsToState()
       } catch (error) {
         console.log(error)
         toast.error('Failed to fetch logs. Please try again.', { position: 'top-right' })
       } finally {
-        setLoading(false)
       }
     }
 
     fetchData()
   }, [fetchAndSetApiLogsToState])
-
-  console.log({ session })
 
   return (
     <section className="flex flex-col gap-12 px-4 h-full w-full">
@@ -62,13 +60,13 @@ function Page() {
             </svg>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">45,231</div>
+            <div className="text-2xl ">{totalRequests(apiLogs)}</div>
             {/* <p className="text-xs text-muted-foreground">+20.1% from last month</p> */}
           </CardContent>
         </Card>
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm">Requests per Day</CardTitle>
+            <CardTitle className="text-sm">Requests today</CardTitle>
 
             <svg
               className="h-4 w-4 text-muted-foreground"
@@ -88,13 +86,14 @@ function Page() {
             </svg>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">531</div>
+            <div className="text-2xl">{countRequestsToday(apiLogs, today)}</div>
             {/* <p className="text-xs text-muted-foreground">+20.1% from last month</p> */}
           </CardContent>
         </Card>
-        <Card>
+
+        {/* <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm">Subscriptions</CardTitle>
+            <CardTitle className="text-sm">Subscription Tier</CardTitle>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -111,10 +110,10 @@ function Page() {
             </svg>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">+2350</div>
-            {/* <p className="text-xs text-muted-foreground">+180.1% from last month</p> */}
+            <div className="text-2xl ">Basic</div>
+            <p className="text-xs text-muted-foreground">+180.1% from last month</p>
           </CardContent>
-        </Card>
+        </Card> */}
       </div>
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-2">
         <Card className="col-span-1">

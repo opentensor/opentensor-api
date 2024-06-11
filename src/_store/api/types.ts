@@ -41,3 +41,28 @@ export type ApiLog = {
   ip: string
   created_at: string
 }
+
+export type StripePlan = {
+  plans: {
+    active: boolean
+    aggregate_usage: string | null
+    amount: number
+    amount_decimal: string
+    billing_scheme: string
+    created: number
+    currency: string
+    id: string
+    interval: string
+    interval_count: number
+    livemode: boolean
+    metadata: Record<string, string>
+    meter: string | null
+    nickname: string | null
+    object: string
+    product: string
+    tiers_mode: string | null
+    transform_usage: string | null
+    trial_period_days: number | null
+    usage_type: string
+  }
+}

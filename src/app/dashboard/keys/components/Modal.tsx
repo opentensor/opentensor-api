@@ -1,5 +1,6 @@
 import { ReloadIcon } from '@radix-ui/react-icons'
 import React from 'react'
+import { Toaster } from 'react-hot-toast'
 
 import { useGlobalStore } from '@/_store/globalStore'
 import {
@@ -17,16 +18,22 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 
 export function Modal() {
-  const [status, createNewApiKey] = useGlobalStore((state) => [state.apiState.status, state.apiActions.createNewApiKey])
+  const [status, error, createNewApiKey] = useGlobalStore((state) => [
+    state.apiState.status,
+    state.apiState.error,
+    state.apiActions.createNewApiKey
+  ])
   const [name, setName] = React.useState('')
 
   async function submitHandler() {
     if (!name) return
+    setName('')
     await createNewApiKey(name)
   }
 
   return (
     <AlertDialog>
+      <Toaster />
       <AlertDialogTrigger asChild>
         <Button className="font-normal">CREATE API KEY</Button>
       </AlertDialogTrigger>

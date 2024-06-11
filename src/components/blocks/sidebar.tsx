@@ -18,7 +18,7 @@ import { ThemeToggle } from '../ui/theme-toggle'
 
 const containerVariants = {
   close: {
-    width: '5rem',
+    width: '2.5rem',
     transition: {
       type: 'spring',
       damping: 15,
@@ -26,7 +26,7 @@ const containerVariants = {
     }
   },
   open: {
-    width: '16rem',
+    width: '15rem',
     transition: {
       type: 'spring',
       damping: 15,
@@ -120,9 +120,9 @@ const Navigation = () => {
         variants={containerVariants}
         animate={containerControls}
         initial="close"
-        className="flex flex-col z-10 gap-20 p-5 absolute top-0 left-0 h-full shadow shadow-neutral-600"
+        className="flex flex-col justify-between gap-20 h-full"
       >
-        <div className="flex  flex-row w-full justify-between place-items-center ">
+        <div className="flex flex-row max-h-[40px] justify-between place-items-center ">
           <div className="dark:invert">
             <Link href={'/'}>
               <Image src="/logo.svg" alt="brand-logo" width={50} height={40} />
@@ -151,7 +151,7 @@ const Navigation = () => {
             </svg>
           </button>
         </div>
-        <div>
+        <div className="flex-1">
           {sideBarLinks.map((item: any, idx: number) => (
             <SidebarNavigation
               key={idx + 1}
@@ -162,24 +162,25 @@ const Navigation = () => {
               target={item.target}
             />
           ))}
+        </div>
 
-          <div className="absolute bottom-10">
+        <div className="flex flex-col max-w-[2.5rem] justify-center items-center">
+          <button className=" text-neutral-400 hover:text-neutral-900 px-3 ease-linear" onClick={handleSignOut}>
+            <FiLogOut size={18} />
+          </button>
+          <button>
+            <Link
+              className={`text-neutral-400 hover:text-neutral-900 px-3 ease-linear  `}
+              href={process.env.NEXT_PUBLIC_FEEDBACK_LINK!}
+              target="_blank"
+            >
+              <RiFeedbackLine size={18} />
+            </Link>
+          </button>
+          <div className="">
             <ThemeToggle />
           </div>
         </div>
-        <button
-          className=" text-neutral-400 hover:text-neutral-900 px-3 ease-linear absolute bottom-36"
-          onClick={handleSignOut}
-        >
-          <FiLogOut size={18} />
-        </button>
-        <Link
-          className={`text-neutral-400 hover:text-neutral-900 px-3 ease-linear  absolute bottom-24`}
-          href={process.env.NEXT_PUBLIC_FEEDBACK_LINK!}
-          target="_blank"
-        >
-          <RiFeedbackLine size={18} />
-        </Link>
       </motion.aside>
     </>
   )

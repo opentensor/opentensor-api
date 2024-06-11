@@ -8,7 +8,7 @@ import { Navbar } from '@/components/blocks/navbar'
 export default function Home() {
   return (
     <main>
-      <div className="flex flex-col">
+      <div className="flex flex-col p-8">
         <Navbar />
         <div className="h-[89vh]">
           <div className="flex items-center justify-center h-full">

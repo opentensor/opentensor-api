@@ -13,6 +13,8 @@ model User {
   email         String          @unique
   emailVerified DateTime?
   image         String?
+  username         String?
+  onboarded     Boolean?  @default(false)  
   accounts      Account[]
   sessions      Session[]
   api_keys      ApiKey[]
@@ -89,6 +91,7 @@ model ApiKey {
   tier            TIER @default(FREE)
   User            User  @relation(fields: [user_id], references: [id])
 }
+
 
 enum TIER {
   FREE

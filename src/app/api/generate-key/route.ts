@@ -4,9 +4,13 @@ import { getServerSession } from 'next-auth'
 import { decryptApiKey, encryptApiKey, generateApiKeys } from '@/_utils/apiKey'
 import { authOptions } from '@/lib/auth/options'
 import { prisma } from '@/lib/database'
+import { findActivePlan } from '@/_utils/helpers'
+import { getUserSubscriptions } from '@/lib/stripe/billing'
 
 export async function POST(request: NextRequest) {
   const session = await getServerSession(authOptions)
+  let apiKeyLimit = 2
+  let highestActivePlan
 
   if (!session) return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 })
 
@@ -20,8 +24,27 @@ export async function POST(request: NextRequest) {
 
   const apiKeysCount = await prisma.apiKey.count({ where: { user_id: user.id } })
 
-  if (apiKeysCount >= 2) {
-    return NextResponse.json({ success: false, error: 'API Keys limit reached for free tier.' }, { status: 402 })
+  if (user.stripe_customer_id) {
+    const activePlans = await getUserSubscriptions(user.stripe_customer_id)
+
+    highestActivePlan = findActivePlan(activePlans.results)
+  }
+
+  if (highestActivePlan === 'year') {
+    apiKeyLimit = Infinity // No limit
+    //TODO:to update the keys max_usage_limit
+  } else if (highestActivePlan === 'month') {
+    apiKeyLimit = 10 // Limit of 10
+  }
+
+  if (apiKeysCount >= apiKeyLimit) {
+    return NextResponse.json(
+      {
+        success: false,
+        error: `API Keys limit reached for ${highestActivePlan ? highestActivePlan + 'ly' : 'free'} tier.`
+      },
+      { status: 402 }
+    )
   }
 
   const apiKeyObj = generateApiKeys()

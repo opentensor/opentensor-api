@@ -1,8 +1,8 @@
 'use client'
 
 import React from 'react'
-import toast, { Toaster } from 'react-hot-toast'
-import { Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
+import toast from 'react-hot-toast'
+import { Bar, BarChart, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
 
 import { useGlobalStore } from '@/_store/globalStore'
 
@@ -51,14 +51,8 @@ export function UsageOverview() {
   return (
     <ResponsiveContainer width="100%" height={420}>
       <BarChart data={transformedData}>
-        <XAxis dataKey="keyName" stroke="#888888" fontSize={12} tickLine={false} axisLine={false} />
-        <YAxis
-          stroke="#888888"
-          fontSize={12}
-          tickLine={false}
-          axisLine={false}
-          tickFormatter={(value: number) => value.toFixed(0)}
-        />
+        <XAxis dataKey="keyName" fontSize={12} tickLine={false} axisLine={false} />
+        <YAxis fontSize={12} tickLine={false} axisLine={false} tickFormatter={(value: number) => value.toFixed(0)} />
         {/* <CartesianGrid strokeDasharray="1 1" /> */}
         <Tooltip />
         <Legend />

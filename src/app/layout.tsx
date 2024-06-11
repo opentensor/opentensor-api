@@ -2,6 +2,7 @@ import './globals.css'
 
 import type { Metadata } from 'next'
 import { DM_Mono } from 'next/font/google'
+import { Suspense } from 'react'
 
 import { AuthProvider } from '@/components/providers/auth-provider'
 import { Themeprovider } from '@/components/providers/theme-provider'
@@ -25,9 +26,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning className={dmMono.className}>
-      <body className="flex flex-col min-h-screen w-screen dark:bg-black px-8 pt-8">
+      <body className="min-h-screen w-screen dark:bg-black">
         <AuthProvider>
-          <Themeprovider>{children}</Themeprovider>
+          <Suspense>
+            <Themeprovider>{children}</Themeprovider>
+          </Suspense>
         </AuthProvider>
       </body>
     </html>
