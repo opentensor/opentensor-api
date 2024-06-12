@@ -44,7 +44,7 @@ export function Navbar() {
             </NavigationMenuContent>
           </NavigationMenuItem>
           <NavigationMenuItem>
-            <Link href={process.env.NEXT_PUBLIC_DOCS_LINK!} target="_blank" legacyBehavior passHref>
+            <Link href={process.env.NEXT_PUBLIC_DOCS_LINK!} target="_blank">
               <NavigationMenuLink className={navigationMenuTriggerStyle()}>DOCS</NavigationMenuLink>
             </Link>
           </NavigationMenuItem>

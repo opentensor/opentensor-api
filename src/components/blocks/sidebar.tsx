@@ -94,7 +94,7 @@ const Navigation = () => {
       },
       {
         name: 'Docs',
-        href: 'https://opentensor.apidog.io/',
+        href: process.env.NEXT_PUBLIC_DOCS_LINK,
         icon: IoDocumentTextSharp,
         target: '_blank'
       },
