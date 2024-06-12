@@ -120,7 +120,7 @@ const Navigation = () => {
         variants={containerVariants}
         animate={containerControls}
         initial="close"
-        className="flex flex-col justify-between gap-20 h-full"
+        className="flex flex-col justify-between gap-20 h-full overflow-hidden"
       >
         <div className="flex flex-row max-h-[40px] justify-between place-items-center ">
           <div className="dark:invert">
