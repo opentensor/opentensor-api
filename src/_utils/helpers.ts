@@ -43,7 +43,7 @@ export function getTodayDate() {
   return `${year}-${month}-${day}`
 }
 
-export function findActivePlan(plansArray: StripePlan[]): string | boolean {
+export function findActivePlan(plansArray: StripePlan[]): string {
   let hasYear = false
   let hasMonth = false
 
@@ -63,7 +63,7 @@ export function findActivePlan(plansArray: StripePlan[]): string | boolean {
   } else if (hasMonth) {
     return 'month'
   } else {
-    return false
+    return 'free'
   }
 }
 

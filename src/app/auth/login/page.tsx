@@ -103,8 +103,8 @@ function Login() {
         <div className="flex flex-col gap-3 items-center">
           <p className="font-normal text-sm">
             Not a member?{' '}
-            <Link href="/auth/register" className="hover:underline">
-              Register
+            <Link href="#" className="hover:underline">
+              Signup
             </Link>
           </p>
           <p className="font-normal text-sm">Or</p>

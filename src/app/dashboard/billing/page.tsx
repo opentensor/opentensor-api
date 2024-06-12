@@ -3,7 +3,16 @@ import React from 'react'
 import Plans from './components/Plans'
 import { Separator } from '@/components/ui/separator'
 import { BsFillCreditCard2FrontFill } from 'react-icons/bs'
+import { getUserSubscriptions } from '@/lib/stripe/billing'
+import { findActivePlan } from '@/_utils/helpers'
+import { getServerSession } from 'next-auth'
+import { authOptions } from '@/lib/auth/options'
 const Page: React.FC = async () => {
+  const session = await getServerSession(authOptions)
+  const activePlans = await getUserSubscriptions(session?.user.stripe_customer_id!)
+
+  const highestActivePlan = findActivePlan(activePlans.results)
+
   return (
     <div className="h-full flex flex-col gap-4  px-4 lg:w-[82%] md:w-[90%]">
       <div className="flex flex-col justify-between">
@@ -18,7 +27,7 @@ const Page: React.FC = async () => {
         </div>
       </div>
       <Separator />
-      <Plans />
+      <Plans planType={highestActivePlan} />
     </div>
   )
 }

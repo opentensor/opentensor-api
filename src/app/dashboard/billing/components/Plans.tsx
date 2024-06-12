@@ -16,6 +16,8 @@ export interface Plan {
   link?: string
   features: any
   priceId?: string
+  interval?: string
+  planType?: string
 }
 
 const plans: Plan[] = [
@@ -23,25 +25,28 @@ const plans: Plan[] = [
     name: 'FREE',
     price: '0',
     description: 'Basic features',
-    features: ['2 API Keys', '1,000 requests per key']
+    features: ['2 API Keys', '1,000 requests per key'],
+    interval: 'free'
   },
   {
     name: 'Monthly',
     price: process.env.NEXT_PUBLIC_MONTHLY_SUB_AMOUNT!,
     description: 'Standard features',
     priceId: process.env.NEXT_PUBLIC_MONTHLY!,
-    features: ['10 API Keys', '10,000 requests per key']
+    features: ['10 API Keys', '10,000 requests per key'],
+    interval: 'month'
   },
   {
     name: 'Yearly',
     price: process.env.NEXT_PUBLIC_YEARLY_SUB_AMOUNT!,
     description: 'Standard features with yearly discount',
     priceId: process.env.NEXT_PUBLIC_YEARLY!,
-    features: ['Unlimited Keys', '100,000 requests per key']
+    features: ['Unlimited Keys', '100,000 requests per key'],
+    interval: 'year'
   }
 ]
 
-function Plans() {
+function Plans({ planType = '' }) {
   const [selectedPlan, setSelectedPlan] = React.useState<Plan>(plans[0])
 
   async function handleSubscribe() {
@@ -84,9 +89,11 @@ function Plans() {
                 ))}
               </div>
             </CardContent>
-            {/* <div className="absolute top-6 right-[-56px] bg-black text-white text-xs font-bold py-1 px-20 transform rotate-[30deg]">
+            <div
+              className={`absolute top-6 right-[-56px] bg-black text-white text-xs font-bold py-1 px-20 transform rotate-[30deg] ${planType !== plan.interval ? 'hidden' : 'block'}`}
+            >
               Active
-            </div> */}
+            </div>
           </Card>
         </div>
       ))}

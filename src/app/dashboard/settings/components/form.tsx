@@ -32,25 +32,36 @@ const accountFormSchema = z.object({
     .max(30, {
       message: 'Name must not be longer than 30 characters.'
     }),
-  email: z.string()
+  email: z.string().email().optional()
 })
 
 type AccountFormValues = z.infer<typeof accountFormSchema>
 
-// This can come from your database or API.
-
 export function AccountForm() {
   const { data: session } = useSession()
+
   const defaultValues: Partial<AccountFormValues> = {
     name: session?.user.name,
     username: session?.user.username,
     // dob: new Date('2023-01-23'),
     email: session?.user.email
   }
+
   const form = useForm<AccountFormValues>({
     resolver: zodResolver(accountFormSchema),
     defaultValues
   })
+
+  React.useEffect(() => {
+    if (session) {
+      form.reset({
+        name: session.user.name,
+        username: session.user.username,
+        email: session.user.email
+      })
+    }
+  }, [session, form])
+
   const [loading, setLoading] = React.useState(false)
 
   async function onSubmit(data: AccountFormValues) {
