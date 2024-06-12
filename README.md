@@ -10,7 +10,6 @@ This repository is designed to provide simple and easy-to-use templates (PAaS --
 
 NOTE: At present, you have to manually configure your own validator to route the requests to. Reach out to koyuki@opentensor.dev for further assistance. In addition, if you need a customized design & UI beyond the templates given, the OTF team is here to help.
 
-
 ## Deploy
 
 We use vercel for deployment: https://opentensor-paas-template.vercel.app/
@@ -19,7 +18,8 @@ We use vercel for deployment: https://opentensor-paas-template.vercel.app/
 
 https://opentensor-paas-template.apidog.io/
 
-# Setup
+
+## Setup
 
 ## 1. Clone the repository
 
