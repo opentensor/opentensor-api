@@ -147,7 +147,7 @@ function Login() {
           </motion.div>
         </Button>
 
-        <Button
+        {/* <Button
           variant="outline"
           disabled={loading}
           className="gap-24 flex items-center rounded-md px-2 py-1.5  outline-none font-normal h-[48px] tracking-wide  hover:opacity-[0.86] "
@@ -162,7 +162,7 @@ function Login() {
             <GrApple className="h-8 w-8 mx-2 text-black dark:text-white " />
             <div className={`pr-12 w-full text-black dark:text-white `}>Continue with Apple</div>
           </motion.div>
-        </Button>
+        </Button> */}
       </div>
     </div>
   )
