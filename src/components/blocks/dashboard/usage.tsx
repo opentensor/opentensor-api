@@ -54,7 +54,7 @@ export function UsageOverview() {
         <XAxis dataKey="keyName" fontSize={12} tickLine={false} axisLine={false} />
         <YAxis fontSize={12} tickLine={false} axisLine={false} tickFormatter={(value: number) => value.toFixed(0)} />
         {/* <CartesianGrid strokeDasharray="1 1" /> */}
-        <Tooltip />
+        <Tooltip labelClassName="dark:invert" />
         <Legend />
         <Bar dataKey="count" fill="#82ca9d" />
       </BarChart>

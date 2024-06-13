@@ -58,7 +58,7 @@ export function StatusOverview() {
         <XAxis dataKey="endpoint" fontSize={12} tickLine={false} axisLine={false} />
         <YAxis fontSize={12} tickLine={false} axisLine={false} tickFormatter={(value: number) => value.toFixed(0)} />
         {/* <CartesianGrid strokeDasharray="1 1" /> */}
-        <Tooltip />
+        <Tooltip labelClassName="dark:invert" />
         <Legend />
         <Bar dataKey="status200" fill="#82ca9d" />
         <Bar dataKey="status500" fill="#FF474C" />

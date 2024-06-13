@@ -24,7 +24,7 @@ export function countRequestsPerDay(logs: ApiLog[]): Record<string, number> {
 
 export function countRequestsToday(logs: ApiLog[], today: string) {
   return logs.reduce((count, log) => {
-    if (+log.status === 200 && extractDate(log.created_at) === today) {
+    if (+log.status === (200 || 500) && extractDate(log.created_at) === today) {
       count += 1
     }
     return count
@@ -32,7 +32,16 @@ export function countRequestsToday(logs: ApiLog[], today: string) {
 }
 
 export function totalRequests(logs: ApiLog[]) {
-  return logs.filter((log) => +log.status === 200).length
+  return logs.reduce((count, log) => {
+    if (+log.status === 200) {
+      count += 1
+    }
+    if (+log.status === 500) {
+      count += 1
+    }
+    return count
+  }, 0)
+  //return logs.filter((log) => +log.status === 200 ).length
 }
 
 export function getTodayDate() {

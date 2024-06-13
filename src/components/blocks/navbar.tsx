@@ -16,8 +16,10 @@ import {
   navigationMenuTriggerStyle
 } from '@/components/ui/navigation-menu'
 import { ThemeToggle } from '@/components/ui/theme-toggle'
+import { signOut, useSession } from 'next-auth/react'
 
 export function Navbar() {
+  const { data: session } = useSession()
   return (
     <header className="flex items-center justify-between">
       <div>
@@ -81,9 +83,15 @@ export function Navbar() {
       </NavigationMenu>
       <NavigationMenu>
         <div>
-          <Link href="/auth/login" legacyBehavior passHref>
-            <NavigationMenuLink className={navigationMenuTriggerStyle()}>Login</NavigationMenuLink>
-          </Link>
+          {!session ? (
+            <Link href="/auth/login" legacyBehavior passHref>
+              <NavigationMenuLink className={navigationMenuTriggerStyle()}>Login</NavigationMenuLink>
+            </Link>
+          ) : (
+            <div onClick={() => signOut()} className="hover:cursor-pointer hover:underline">
+              <p className="text-xs px-4">Logout</p>
+            </div>
+          )}
         </div>
 
         <div>

@@ -47,7 +47,7 @@ const plans: Plan[] = [
 ]
 
 function Plans({ planType = '' }) {
-  const [selectedPlan, setSelectedPlan] = React.useState<Plan>(plans[0])
+  const [selectedPlan, setSelectedPlan] = React.useState<any>()
 
   async function handleSubscribe() {
     try {
@@ -64,11 +64,11 @@ function Plans({ planType = '' }) {
       {plans.map((plan) => (
         <div key={plan.name}>
           <Card
-            className={`overflow-hidden relative mb-8 pt-4 items-center justify-between gap-3 flex ${selectedPlan.name === plan.name ? 'border-slate-500' : ''}`}
+            className={`overflow-hidden relative mb-8 pt-4 items-center justify-between gap-3 flex ${selectedPlan?.name === plan.name ? 'border-slate-500' : ''}`}
           >
             <CardContent className="flex justify-between w-full gap-3">
               <RadioGroup
-                value={selectedPlan.name}
+                value={selectedPlan?.name}
                 onValueChange={() => setSelectedPlan(plan)}
                 name="plans"
                 className="flex items-center flex-1"
@@ -97,7 +97,7 @@ function Plans({ planType = '' }) {
           </Card>
         </div>
       ))}
-      <Button disabled={selectedPlan.name === 'FREE'} onClick={handleSubscribe}>
+      <Button disabled={!selectedPlan || selectedPlan?.name === 'FREE'} onClick={handleSubscribe}>
         Manage
       </Button>
       <Toaster position="top-right" />
