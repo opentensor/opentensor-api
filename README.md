@@ -23,9 +23,13 @@ https://opentensor-paas-template.apidog.io/
 
 ## 1. Clone the repository
 
-Clone the opentensor-api repository to your local machine:
+ i. Clone the opentensor-api repository to your local machine using git:
 
 `git clone https://github.com/opentensor/opentensor-api.git`
+ 
+ ii. use to following command to pull docker image
+
+`docker pull...`
 
 ## 2. Setup environment
 
