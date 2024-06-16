@@ -1,8 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
 
+import { prisma } from '@/lib/database'
+
 import { hashApiKey } from '../../../_utils/apiKey'
 import { postImageToImage } from './handlers'
-import { prisma } from '@/lib/database'
 import { VisionImageToImage } from './type'
 
 export const maxDuration = 30
@@ -21,8 +22,6 @@ export async function POST(request: NextRequest) {
       key_hashed: hashedApiKey
     }
   })
-
- 
 
   if (!apiKey) return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 })
 

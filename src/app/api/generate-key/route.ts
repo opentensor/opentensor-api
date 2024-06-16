@@ -2,9 +2,9 @@ import { NextRequest, NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth'
 
 import { decryptApiKey, encryptApiKey, generateApiKeys } from '@/_utils/apiKey'
+import { findActivePlan } from '@/_utils/helpers'
 import { authOptions } from '@/lib/auth/options'
 import { prisma } from '@/lib/database'
-import { findActivePlan } from '@/_utils/helpers'
 import { getUserSubscriptions } from '@/lib/stripe/billing'
 
 export async function POST(request: NextRequest) {

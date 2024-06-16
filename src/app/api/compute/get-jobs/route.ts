@@ -1,8 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
 
+import { prisma } from '@/lib/database'
+
 import { hashApiKey } from '../../../../_utils/apiKey'
 import { getJobs } from './handlers'
-import { prisma } from '@/lib/database'
 
 export async function GET(request: NextRequest) {
   const headers = new Headers(request.headers)

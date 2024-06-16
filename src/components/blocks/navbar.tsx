@@ -2,10 +2,10 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
+import { signOut, useSession } from 'next-auth/react'
 import * as React from 'react'
 
 import { cn } from '@/_utils/cn'
-
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -16,7 +16,6 @@ import {
   navigationMenuTriggerStyle
 } from '@/components/ui/navigation-menu'
 import { ThemeToggle } from '@/components/ui/theme-toggle'
-import { signOut, useSession } from 'next-auth/react'
 
 export function Navbar() {
   const { data: session } = useSession()

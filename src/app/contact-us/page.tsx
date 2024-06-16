@@ -1,16 +1,16 @@
 'use client'
 
-import { Navbar } from '@/components/blocks/navbar'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { ReloadIcon } from '@radix-ui/react-icons'
 import { motion } from 'framer-motion'
 import React, { useState } from 'react'
-import toast, { Toaster } from 'react-hot-toast'
-
-import { zodResolver } from '@hookform/resolvers/zod'
-import { z } from 'zod'
-import { ReloadIcon } from '@radix-ui/react-icons'
 import { useForm } from 'react-hook-form'
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
+import toast, { Toaster } from 'react-hot-toast'
+import { z } from 'zod'
+
+import { Navbar } from '@/components/blocks/navbar'
 import { Button } from '@/components/ui/button'
+import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 
 const accountFormSchema = z.object({

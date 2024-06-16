@@ -1,6 +1,7 @@
+import toast from 'react-hot-toast'
+
 import { ApiLog, StripePlan } from '@/_store/api/types'
 import { prisma } from '@/lib/database'
-import toast from 'react-hot-toast'
 
 export function extractDate(timestamp: string) {
   return timestamp.split('T')[0]

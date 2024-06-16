@@ -6,8 +6,8 @@ import toast, { Toaster } from 'react-hot-toast'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
-import { createCheckoutSession } from '@/lib/stripe/billing'
 import { Separator } from '@/components/ui/separator'
+import { createCheckoutSession } from '@/lib/stripe/billing'
 
 export interface Plan {
   name: string

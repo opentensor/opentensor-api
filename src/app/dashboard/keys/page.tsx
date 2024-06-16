@@ -7,10 +7,10 @@ import { MdContentCopy, MdDelete } from 'react-icons/md'
 
 import { ApiKey } from '@/_store/api/types'
 import { useGlobalStore } from '@/_store/globalStore'
+import { copyToClipboard } from '@/_utils/helpers'
 
 import { Modal } from './components/Modal'
 import { SkeletonLoader } from './components/SkeletonLoader'
-import { copyToClipboard } from '@/_utils/helpers'
 
 function Page() {
   const [apiKeys, status, fetchAndSetApiKeysToState, deleteApiKey] = useGlobalStore((state) => [

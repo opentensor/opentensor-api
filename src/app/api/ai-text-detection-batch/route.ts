@@ -1,8 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
 
+import { prisma } from '@/lib/database'
+
 import { hashApiKey } from '../../../_utils/apiKey'
 import { AITextDetectionBatchRequest, postAITextDetectionBatchQuery } from './handlers'
-import { prisma } from '@/lib/database'
 
 export const maxDuration = 30
 
