@@ -5,6 +5,7 @@ import toast, { Toaster } from 'react-hot-toast'
 import { BsBarChartFill } from 'react-icons/bs'
 
 import { useGlobalStore } from '@/_store/globalStore'
+
 import { SkeletonLoader } from './components/SkeletonLoader'
 
 function Page() {

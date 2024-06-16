@@ -1,3 +1,4 @@
+import toast from 'react-hot-toast'
 import { StateCreator } from 'zustand'
 
 import { withAsync } from '@/_utils/withAsync'
@@ -5,7 +6,6 @@ import { withAsync } from '@/_utils/withAsync'
 import { CombinedSlices } from '../types'
 import { createNewApiKey, deleteKey, getAllApiKeysOfUser, getAllApiLogsOfUser } from './actions'
 import { ApiSlice, ApiState } from './types'
-import toast from 'react-hot-toast'
 
 const initialApiState: ApiState = {
   status: 'IDLE',
