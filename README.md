@@ -18,16 +18,15 @@ We use vercel for deployment: https://opentensor-paas-template.vercel.app/
 
 https://opentensor-paas-template.apidog.io/
 
-
 ## Setup
 
 ## 1. Clone the repository
 
- i. Clone the opentensor-api repository to your local machine using git:
+i. Clone the opentensor-api repository to your local machine using git:
 
 `git clone https://github.com/opentensor/opentensor-api.git`
- 
- ii. use to following command to pull docker image
+
+ii. use to following command to pull docker image
 
 `docker pull...`
 
@@ -51,36 +50,48 @@ Get your stripe keys: https://stripe.com/docs/keys
 
 ### Email
 
+1. Using Gmail SMPT and nodemailer:
+   Signing in to Google > App passwords
+   https://myaccount.google.com › apppasswords
+
+`EMAIL_USER: your_gmail_email@gmail.com`
+
+`EMAIL_APP_PASSWORD: your_app_password_here`
+
+
+
+1. Using Resend: Create a free Resend account and paste in your API key: https://resend.com
+
+Connect your domain, and replace the email in `src/lib/email/resend-mailer.ts` file.
+
 `RESEND_SECRET:`
 
 `RESEND_DOMAIN: your custom domain or 'resend.dev' `
-
-Create a free Resend account and paste in your API key: https://resend.com
-
-Connect your domain, and replace the email in `src/lib/email/mailer.ts` file.
 
 ### Auth
 
 1. Create your Google Auth Credentials here:
    https://console.cloud.google.com/apis/
 
-   `GOOGLE_CLIENT_ID:`
+`GOOGLE_CLIENT_ID:`
 
-   `GOOGLE_CLIENT_SECRET:`
+`GOOGLE_CLIENT_SECRET:`
 
 2. Create your Github Auth Credentials here:
    https://github.com/settings/developers
 
-   `GITHUB_CLIENT_ID:`
+`GITHUB_CLIENT_ID:`
 
-   `GITHUB_CLIENT_SECRET:`
+`GITHUB_CLIENT_SECRET:`
 
-3. `NEXTAUTH_URL='http://localhost:3000'` for development
-   for production, replace this with your website url
+3. NEXT Auth
 
-   `NEXTAUTH_SECRET:` A random string is used to hash tokens, sign/encrypt cookies and generate cryptographic keys.
+`NEXTAUTH_URL='http://localhost:3000'` for development
+for production, replace this with your website url
 
-   `APIKEY_ENCRYPT_KEY:`
+`NEXTAUTH_SECRET:` A random string is used to hash tokens, sign/encrypt cookies and generate cryptographic keys.
+
+`APIKEY_ENCRYPT_KEY:`
 
 ### Vision(SN19)
 
@@ -128,4 +139,5 @@ When deploying to Vercel, make sure you update your environment variables.
 
 # Resources
 
-Links
+1. https://nodemailer.com/smtp
+2. https://next-auth.js.org/getting-started

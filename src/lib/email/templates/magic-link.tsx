@@ -12,6 +12,7 @@ import {
   Tailwind,
   Text
 } from '@react-email/components'
+import { render } from '@react-email/components'
 
 export const MagicLinkEmail = ({ signInLink, sentTo }: { signInLink: string; sentTo: string }) => (
   <Html>
@@ -61,4 +62,7 @@ export const MagicLinkEmail = ({ signInLink, sentTo }: { signInLink: string; sen
   </Html>
 )
 
-export default MagicLinkEmail
+export const generateEmailHtml = (signInLink: string, sentTo: string): string => {
+  const emailComponent = <MagicLinkEmail signInLink={signInLink} sentTo={sentTo} />
+  return render(emailComponent)
+}

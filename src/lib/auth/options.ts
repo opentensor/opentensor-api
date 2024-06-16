@@ -6,10 +6,12 @@ import GithubProvider from 'next-auth/providers/github'
 import GoogleProvider from 'next-auth/providers/google'
 
 import { prisma } from '../database'
-import { sendMagicLinkEmail } from '../email/mailer'
+import { sendMagicLinkFromGmail } from '../email/node-mailer'
+import { sendMagicLinkEmail } from '../email/resend-mailer'
 
 export const authOptions = {
   debug: true,
+
   session: {
     strategy: 'database'
   },
@@ -33,6 +35,13 @@ export const authOptions = {
         session.user.stripe_customer_id = db.stripe_customer_id ?? ''
       }
       return session
+    },
+    async signIn({ user, account, profile, email, credentials }) {
+      if (account?.provider === 'email') {
+        // Generate magic link for email logins
+        return true
+      }
+      return false
     }
   },
   providers: [
@@ -64,14 +73,22 @@ export const authOptions = {
       },
       allowDangerousEmailAccountLinking: true //TODO:change this is handle error if user has already an account with same email but different provider
     }),
-    EmailProvider({
-      async sendVerificationRequest({ identifier: email, url, provider: { server, from } }) {
-        await sendMagicLinkEmail(email, url)
-      },
-      async generateVerificationToken() {
-        return 'magic_link_' + crypto.randomUUID()
+    EmailProvider(
+      //TO use Resend(https://www.resend.com)  uncomment the below
+      //   {
+      //   async sendVerificationRequest({ identifier: email, url, provider: { server, from } }) {
+      //     await sendMagicLinkEmail(email, url)
+      //   },
+      //   async generateVerificationToken() {
+      //     return 'magic_link_' + crypto.randomUUID()
+      //   }
+      // }
+      {
+        sendVerificationRequest: async ({ identifier: email, url, token, provider }) => {
+          await sendMagicLinkFromGmail(email, url, provider)
+        }
       }
-    })
+    )
   ]
 } as AuthOptions
 

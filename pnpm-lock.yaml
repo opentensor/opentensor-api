@@ -6,16 +6,16 @@ settings:
 
 dependencies:
   '@auth/prisma-adapter':
-    specifier: ^2.2.0
-    version: 2.2.0(@prisma/client@5.15.0)
+    specifier: 2.2.0
+    version: 2.2.0(@prisma/client@5.15.0)(nodemailer@6.9.13)
   '@hookform/resolvers':
     specifier: 3.4.2
     version: 3.4.2(react-hook-form@7.51.5)
   '@prisma/client':
-    specifier: ^5.15.0
+    specifier: 5.15.0
     version: 5.15.0(prisma@5.14.0)
   '@radix-ui/react-alert-dialog':
-    specifier: ^1.0.5
+    specifier: 1.0.5
     version: 1.0.5(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
   '@radix-ui/react-checkbox':
     specifier: 1.0.4
@@ -33,16 +33,16 @@ dependencies:
     specifier: 1.1.4
     version: 1.1.4(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
   '@radix-ui/react-popover':
-    specifier: ^1.0.7
+    specifier: 1.0.7
     version: 1.0.7(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
   '@radix-ui/react-radio-group':
     specifier: ^1.1.3
     version: 1.1.3(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
   '@radix-ui/react-select':
-    specifier: ^2.0.0
+    specifier: 2.0.0
     version: 2.0.0(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
   '@radix-ui/react-separator':
-    specifier: ^1.0.3
+    specifier: 1.0.3
     version: 1.0.3(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
   '@radix-ui/react-slot':
     specifier: 1.0.2
@@ -62,6 +62,9 @@ dependencies:
   '@types/node':
     specifier: ^20
     version: 20.12.13
+  '@types/nodemailer':
+    specifier: 6.4.15
+    version: 6.4.15
   '@types/react':
     specifier: ^18
     version: 18.3.3
@@ -81,7 +84,7 @@ dependencies:
     specifier: ^1.0.0
     version: 1.0.0(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
   date-fns:
-    specifier: ^3.6.0
+    specifier: 3.6.0
     version: 3.6.0
   eslint:
     specifier: ^8
@@ -108,11 +111,14 @@ dependencies:
     specifier: 14.2.3
     version: 14.2.3(react-dom@18.3.1)(react@18.3.1)
   next-auth:
-    specifier: ^4.24.7
-    version: 4.24.7(next@14.2.3)(react-dom@18.3.1)(react@18.3.1)
+    specifier: 4.24.7
+    version: 4.24.7(next@14.2.3)(nodemailer@6.9.13)(react-dom@18.3.1)(react@18.3.1)
   next-themes:
-    specifier: ^0.3.0
+    specifier: 0.3.0
     version: 0.3.0(react-dom@18.3.1)(react@18.3.1)
+  nodemailer:
+    specifier: 6.9.13
+    version: 6.9.13
   postcss:
     specifier: ^8
     version: 8.4.38
@@ -126,7 +132,7 @@ dependencies:
     specifier: ^18
     version: 18.3.1
   react-day-picker:
-    specifier: ^8.10.1
+    specifier: 8.10.1
     version: 8.10.1(date-fns@3.6.0)(react@18.3.1)
   react-dom:
     specifier: ^18
@@ -135,13 +141,13 @@ dependencies:
     specifier: 7.51.5
     version: 7.51.5(react@18.3.1)
   react-hot-toast:
-    specifier: ^2.4.1
+    specifier: 2.4.1
     version: 2.4.1(csstype@3.1.3)(react-dom@18.3.1)(react@18.3.1)
   react-icons:
     specifier: 5.1.0
     version: 5.1.0(react@18.3.1)
   recharts:
-    specifier: ^2.12.7
+    specifier: 2.12.7
     version: 2.12.7(react-dom@18.3.1)(react@18.3.1)
   resend:
     specifier: 3.2.0
@@ -178,7 +184,7 @@ packages:
     engines: {node: '>=10'}
     dev: false
 
-  /@auth/core@0.32.0:
+  /@auth/core@0.32.0(nodemailer@6.9.13):
     resolution: {integrity: sha512-3+ssTScBd+1fd0/fscAyQN1tSygXzuhysuVVzB942ggU4mdfiTbv36P0ccVnExKWYJKvu3E2r3/zxXCCAmTOrg==}
     peerDependencies:
       '@simplewebauthn/browser': ^9.0.1
@@ -196,17 +202,18 @@ packages:
       '@types/cookie': 0.6.0
       cookie: 0.6.0
       jose: 5.4.0
+      nodemailer: 6.9.13
       oauth4webapi: 2.10.4
       preact: 10.11.3
       preact-render-to-string: 5.2.3(preact@10.11.3)
     dev: false
 
-  /@auth/prisma-adapter@2.2.0(@prisma/client@5.15.0):
+  /@auth/prisma-adapter@2.2.0(@prisma/client@5.15.0)(nodemailer@6.9.13):
     resolution: {integrity: sha512-DiXgyJfqBb/6TPhNJ5IcRw3klxcFD+qaa7qvOYopV6rYinSUvsQkJ30m+so2SRlEsuDA6PqMu+Mf5Sd+zr3g+Q==}
     peerDependencies:
       '@prisma/client': '>=2.26.0 || >=3 || >=4 || >=5'
     dependencies:
-      '@auth/core': 0.32.0
+      '@auth/core': 0.32.0(nodemailer@6.9.13)
       '@prisma/client': 5.15.0(prisma@5.14.0)
     transitivePeerDependencies:
       - '@simplewebauthn/browser'
@@ -1591,6 +1598,12 @@ packages:
     resolution: {integrity: sha512-gBGeanV41c1L171rR7wjbMiEpEI/l5XFQdLLfhr/REwpgDy/4U8y89+i8kRiLzDyZdOkXh+cRaTetUnCYutoXA==}
     dependencies:
       undici-types: 5.26.5
+    dev: false
+
+  /@types/nodemailer@6.4.15:
+    resolution: {integrity: sha512-0EBJxawVNjPkng1zm2vopRctuWVCxk34JcIlRuXSf54habUWdz1FB7wHDqOqvDa8Mtpt0Q3LTXQkAs2LNyK5jQ==}
+    dependencies:
+      '@types/node': 20.12.13
     dev: false
 
   /@types/prop-types@15.7.12:
@@ -3588,7 +3601,7 @@ packages:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
     dev: false
 
-  /next-auth@4.24.7(next@14.2.3)(react-dom@18.3.1)(react@18.3.1):
+  /next-auth@4.24.7(next@14.2.3)(nodemailer@6.9.13)(react-dom@18.3.1)(react@18.3.1):
     resolution: {integrity: sha512-iChjE8ov/1K/z98gdKbn2Jw+2vLgJtVV39X+rCP5SGnVQuco7QOr19FRNGMIrD8d3LYhHWV9j9sKLzq1aDWWQQ==}
     peerDependencies:
       next: ^12.2.5 || ^13 || ^14
@@ -3604,6 +3617,7 @@ packages:
       cookie: 0.5.0
       jose: 4.15.5
       next: 14.2.3(react-dom@18.3.1)(react@18.3.1)
+      nodemailer: 6.9.13
       oauth: 0.9.15
       openid-client: 5.6.5
       preact: 10.22.0
@@ -3663,6 +3677,11 @@ packages:
     transitivePeerDependencies:
       - '@babel/core'
       - babel-plugin-macros
+    dev: false
+
+  /nodemailer@6.9.13:
+    resolution: {integrity: sha512-7o38Yogx6krdoBf3jCAqnIN4oSQFx+fMa0I7dK1D+me9kBxx12D+/33wSb+fhOCtIxvYJ+4x4IMEhmhCKfAiOA==}
+    engines: {node: '>=6.0.0'}
     dev: false
 
   /nopt@7.2.1:
