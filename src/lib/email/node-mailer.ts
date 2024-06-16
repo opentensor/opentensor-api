@@ -13,7 +13,7 @@ const transport = nodemailer.createTransport({
 export async function sendMagicLinkFromGmail(email: string, signInLink: string, provider: any) {
   const result = await transport.sendMail({
     to: email,
-    from: provider.from,
+    from: `${process.env.NEXT_PUBLIC_BRAND_NAME!} ${provider.from}`,
     subject: 'Sign in to your ' + process.env.NEXT_PUBLIC_BRAND_NAME + ' account',
     // text: text({ signInLink, host }),
     html: generateEmailHtml(signInLink, email)
