@@ -11,7 +11,7 @@ import { FaKey } from 'react-icons/fa'
 import { FiLogOut } from 'react-icons/fi'
 import { IoDocumentTextSharp } from 'react-icons/io5'
 import { MdOutlineDashboard } from 'react-icons/md'
-import { RiFeedbackLine } from 'react-icons/ri'
+import { RiApps2Fill, RiFeedbackLine } from 'react-icons/ri'
 
 import SidebarNavigation from '../ui/sidebar-navgation'
 import { ThemeToggle } from '../ui/theme-toggle'
@@ -91,6 +91,12 @@ const Navigation = () => {
         href: '/dashboard/logs',
         icon: BsBarChartFill,
         active: pathname === '/dashboard/logs'
+      },
+      {
+        name: 'App Center',
+        href: '/dashboard/apps',
+        icon: RiApps2Fill,
+        active: pathname === '/dashboard/apps'
       },
       {
         name: 'Docs',
