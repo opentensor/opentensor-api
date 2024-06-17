@@ -32,13 +32,13 @@ function Page() {
   }, [])
 
   return (
-    <div className="flex flex-col gap-12 px-4 lg:w-[82%] md:w-[90%]">
+    <div className="flex flex-col gap-12 px-4 lg:w-[85%] md:w-[90%]">
       <Toaster />
       <div className="flex flex-col justify-between">
-        <div className="flex flex-col gap-3 py-4">
+        <div className="flex flex-col gap-3">
           <div className="flex items-center gap-3">
             <BsBarChartFill className="w-6 h-6" />
-            <h1 className="text-4xl  font-normal">API Logs</h1>
+            <h1 className="text-4xl  font-[Haffer]">API Logs</h1>
           </div>
           <div className="text-xs  font-light tracking-widest">Most recent calls made using your API keys.</div>
         </div>
