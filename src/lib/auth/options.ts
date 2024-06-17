@@ -35,13 +35,6 @@ export const authOptions = {
         session.user.stripe_customer_id = db.stripe_customer_id ?? ''
       }
       return session
-    },
-    async signIn({ user, account, profile, email, credentials }) {
-      if (account?.provider === 'email') {
-        // Generate magic link for email logins
-        return true
-      }
-      return false
     }
   },
   providers: [
