@@ -1,6 +1,8 @@
-import React from 'react'
+'use client'
+import React, { useState } from 'react'
 
 import AppSection from './components/AppSection'
+import { SkeletonLoader } from './components/SkeletonLoader'
 
 export interface AppList {
   name: string
@@ -49,11 +51,18 @@ const appList: AppList[] = [
 ]
 
 function Page() {
+  const [isLoading, setIsLoading] = useState(false)
   return (
     <section>
       <div className="">
-        <AppSection items={appList} title="Popular Apps" />
-        <AppSection items={appList} title="Latest Apps" />
+        {isLoading ? (
+          <SkeletonLoader />
+        ) : (
+          <>
+            <AppSection items={appList} title="Popular Apps" />
+            <AppSection items={appList} title="Latest Apps" />
+          </>
+        )}
       </div>
     </section>
   )
