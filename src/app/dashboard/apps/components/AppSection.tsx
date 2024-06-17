@@ -18,7 +18,7 @@ const AppSection: React.FC<AppSectionProps> = ({ items, title }) => {
   const displayItems = showAll ? items : items.slice(0, 4)
 
   return (
-    <div className="p-4">
+    <div className="py-4">
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-xl font-light">{title}</h2>
         <button onClick={() => setShowAll(!showAll)} className="hover:underline text-xs font-light">

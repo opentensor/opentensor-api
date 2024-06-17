@@ -55,7 +55,7 @@ function Page() {
   return (
     <section>
       <div className="">
-        {isLoading ? (
+        {!isLoading ? (
           <SkeletonLoader />
         ) : (
           <>
