@@ -8,10 +8,13 @@
     "start": "next start",
     "lint": "next lint",
     "migrate": "npx prisma migrate dev",
+    "release": "npx changeset version",
+    "publish": "npx changeset publish",
     "postinstall": "prisma generate"
   },
   "dependencies": {
     "@auth/prisma-adapter": "2.2.0",
+    "@changesets/cli": "^2.27.5",
     "@hookform/resolvers": "3.4.2",
     "@prisma/client": "5.15.0",
     "@radix-ui/react-alert-dialog": "1.0.5",
