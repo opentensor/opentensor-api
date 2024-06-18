@@ -8,8 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "migrate": "npx prisma migrate dev",
-    "release": "pnpm dlx changeset version",
-    "publish": "pnpm dlx changeset publish",
+    "release": "npx changeset version",
+    "publish": "npx changeset publish",
     "postinstall": "prisma generate"
   },
   "dependencies": {
