@@ -58,8 +58,6 @@ Get your stripe keys: https://stripe.com/docs/keys
 
 `EMAIL_APP_PASSWORD: your_app_password_here`
 
-
-
 1. Using Resend: Create a free Resend account and paste in your API key: https://resend.com
 
 Connect your domain, and replace the email in `src/lib/email/resend-mailer.ts` file.
@@ -137,7 +135,33 @@ Run the local development server:
 
 When deploying to Vercel, make sure you update your environment variables.
 
+## 7. Release
+
+To initaie a release, after commiting the changes to github run the following commands:
+
+1. `npx changeset add`
+
+the above command lets you add a custom Release note
+
+2. `pnpm run release` choose: patch | minor | major
+
+See here for information on [semver](https://semver.org/) versioning
+
+3. Your final prompt will be to provide a message to go alongside the changeset. This will be written into the changelog when the next release occurs.
+4. After this, a new changeset will be added which is a markdown file with YAML front matter.
+
+```
+-| .changeset/
+-|-| UNIQUE_ID.md
+
+```
+
+The message you typed can be found in the markdown file. If you want to expand on it, you can write as much markdown as you want, which will all be added to the changelog on publish. If you want to change the bump type for the changeset, that's also fine.
+
+4. Once you are happy with the changeset, commit the file to your branch.
+
 # Resources
 
 1. https://nodemailer.com/smtp
 2. https://next-auth.js.org/getting-started
+3. https://github.com/changesets/changesets
