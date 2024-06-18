@@ -14,8 +14,8 @@ const dmMono = DM_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'Api platform',
-  description: 'Created by Opentensor',
+  title: 'OTF PaaS Template',
+  description: 'Created by Opentensor Foundation',
   icons: '/favicon.ico'
 }
 
