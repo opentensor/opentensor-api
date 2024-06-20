@@ -18,7 +18,7 @@ const Sidebar = () => {
   ]
 
   return (
-    <div className="h-[70vh] flex flex-col gap-2  justify-center text-neutral-400 dark:invert bg-white  rounded-r-lg ">
+    <div className="h-[70vh] flex flex-col gap-4  justify-center text-neutral-400 dark:invert bg-white  rounded-r-lg ">
       {icons.map((item, index) => (
         <div key={index}>
           <TooltipProvider delayDuration={100}>
