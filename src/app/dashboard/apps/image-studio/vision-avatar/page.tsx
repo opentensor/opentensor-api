@@ -14,12 +14,12 @@ function Page() {
           <SquareUserRound size={30} />
           <h2 className="">Avatar</h2>
         </div>
+
         <Textarea
           placeholder="Describe how you'd like your avatar to look..."
-          className="resize-none w-full text-sm h-[120px] 
-         
-          "
+          className="resize-none w-full text-sm h-[120px] "
         />
+
         <Button className="flex items-center justify-center">
           Generate Avatar
           <ChevronRight size={20} />

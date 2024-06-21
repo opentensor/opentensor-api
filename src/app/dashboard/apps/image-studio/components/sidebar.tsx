@@ -10,10 +10,10 @@ const Sidebar = () => {
     {
       icon: <Images size={22} className="font-light" />,
       label: 'Generate',
-      to: '/dashboard/apps/image-studio/vision-avatar'
+      to: '/dashboard/apps/image-studio/vision-text-to-image'
     },
-    { icon: <RefreshCcwDot size={22} />, label: 'Reimagine', to: '/dashboard/apps/image-studio/vision-avatar' },
-    { icon: <Palette size={22} />, label: 'Inpaint', to: '/dashboard/apps/image-studio/vision-avatar' },
+    { icon: <RefreshCcwDot size={22} />, label: 'Reimagine', to: '/dashboard/apps/image-studio/vision-image-to-image' },
+    { icon: <Palette size={22} />, label: 'Inpaint', to: '/dashboard/apps/image-studio/vision-inpaint' },
     { icon: <Users size={22} />, label: 'Avatar', to: '/dashboard/apps/image-studio/vision-avatar' }
   ]
 
