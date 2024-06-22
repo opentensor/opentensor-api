@@ -13,14 +13,20 @@ export interface AppList {
 
 const appList: AppList[] = [
   {
-    name: 'Image Studio',
-    description: 'Generate your Avatar with AI.',
+    name: 'TAO Image-Studio',
+    description: 'Image generation',
     imgSrc: 'https://corcel.b-cdn.net/082efbdd-8fac-4f99-9b1a-8232713319db.webp',
     href: '/dashboard/apps/image-studio/vision-avatar'
   },
   {
+    name: 'BitAI Chat',
+    description: 'Intelligent chatbot',
+    imgSrc: 'https://corcel.b-cdn.net/082efbdd-8fac-4f99-9b1a-8232713319db.webp',
+    href: '#'
+  },
+  {
     name: 'Avatar',
-    description: 'Generate your Avatar with AI.',
+    description: 'Generate your Avatar with AI',
     imgSrc: 'https://corcel.b-cdn.net/082efbdd-8fac-4f99-9b1a-8232713319db.webp',
     href: '/dashboard/apps/image-studio/vision-avatar'
   }
