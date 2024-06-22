@@ -1,7 +1,6 @@
-import { Images, Palette, RefreshCcwDot, Users } from 'lucide-react'
+import { History, Images, Palette, RefreshCcwDot, Users } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
-import { FiUsers } from 'react-icons/fi'
 
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 
@@ -13,8 +12,9 @@ const Sidebar = () => {
       to: '/dashboard/apps/image-studio/vision-text-to-image'
     },
     { icon: <RefreshCcwDot size={22} />, label: 'Reimagine', to: '/dashboard/apps/image-studio/vision-image-to-image' },
-    { icon: <Palette size={22} />, label: 'Inpaint', to: '/dashboard/apps/image-studio/vision-inpaint' },
-    { icon: <Users size={22} />, label: 'Avatar', to: '/dashboard/apps/image-studio/vision-avatar' }
+    // { icon: <Palette size={22} />, label: 'Inpaint', to: '/dashboard/apps/image-studio/vision-inpaint' },
+    { icon: <Users size={22} />, label: 'Avatar', to: '/dashboard/apps/image-studio/vision-avatar' },
+    { icon: <History size={22} />, label: 'History', to: '/dashboard/apps/image-studio/history' }
   ]
 
   return (
