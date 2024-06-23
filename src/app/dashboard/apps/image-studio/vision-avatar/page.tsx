@@ -66,9 +66,11 @@ function Page() {
         },
         body: reqData
       })
-      const imgData = await res.json()
-      setAvatarStr(imgData.image_b64)
-      if (imgData.error) {
+      const response = await res.json()
+      if (response.success) {
+        setAvatarStr(response.result.image_b64)
+      }
+      if (response.error) {
         toast.error('Failed to generate avatar. Please try again.', { position: 'top-right' })
       }
     } catch (error) {

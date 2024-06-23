@@ -1,7 +1,11 @@
 'use client'
 import { Send } from 'lucide-react'
 import React from 'react'
+import toast, { Toaster } from 'react-hot-toast'
 
+import { useGlobalStore } from '@/_store/globalStore'
+import Loader from '@/components/blocks/loader'
+import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import {
@@ -15,25 +19,91 @@ import {
 } from '@/components/ui/select'
 import { Slider } from '@/components/ui/slider'
 
+import ImageCard from '../vision-avatar/components/ImageCard'
+
 function Page() {
   const engine = ['proteus', 'dreamshaper', 'playground', 'stable-diffusion-xl-turbo']
-  const [guidanceScale, setGuidanceScale] = React.useState([2])
+  const [prompt, setPrompt] = React.useState<string>('')
+  const [loading, setLoading] = React.useState(false)
+  const [imgUrl, setImgUrl] = React.useState<string>('')
+  const selectedKey = useGlobalStore((state) => state.apiState.selectedKey)
 
+  const [guidanceScale, setGuidanceScale] = React.useState([2])
   const [steps, setSteps] = React.useState([9])
-  const [engineValue, setEngineValue] = React.useState('proteus')
+  const [engineValue, setEngineValue] = React.useState<string>('proteus')
+
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault()
+    if (!selectedKey) {
+      toast.error('Please select a valid api key', { position: 'top-right' })
+      return
+    }
+    let reqData = JSON.stringify({
+      text_prompts: [
+        {
+          text: prompt
+        }
+      ],
+      engine: engineValue,
+      steps: steps.toString(),
+      cfg_scale: guidanceScale.toString()
+    })
+
+   
+    try {
+      setPrompt('')
+      setLoading(true)
+      const res = await fetch('/api/vision-text-to-image', {
+        method: 'POST',
+        headers: { accept: 'application/json', 'Content-Type': 'application/json', 'X-API-KEY': selectedKey },
+        body: reqData
+      })
+      const response = await res.json()
+      if (response.success) {
+        setImgUrl(response.result.image_b64)
+      }
+      if (response.error) {
+        toast.error('Failed to retrieve image. Please try again.', { position: 'top-right' })
+      }
+    } catch (error) {
+      setPrompt('')
+      console.log(error)
+    }
+    setLoading(false)
+  }
+
   return (
     <div className="flex h-full px-8 gap-3 py-4">
+      <Toaster />
+
       <div className="w-full h-full flex flex-col justify-center gap-10 dark:invert">
-        <div className="flex items-center bg-white border px-4">
+        <form onSubmit={handleSubmit} className="flex items-center bg-white border px-4 ">
           <Input
-            className="h-12 shadow-none border-none dark:invert px-2 focus-visible:ring-0"
+            className="h-12 shadow-none border-none dark:invert px-2 focus-visible:ring-0 "
             placeholder="Imagine and describe what you want to see"
+            value={prompt}
+            onChange={(e) => setPrompt(e.target.value)}
+            required
+            disabled={loading}
           />
-          <div className="p-2 shadow-sm">
+          <Button type="submit" variant="ghost" className="p-2 shadow-sm">
             <Send className="dark:invert hover:cursor-pointer" />
-          </div>
+          </Button>
+        </form>
+        <div className="relative border flex-1 bg-white">
+          {loading ? (
+            <Loader />
+          ) : (
+            <div className={`absolute z-40 ${!imgUrl ? 'hidden' : 'block'}`}>
+              <img
+                src={`data:image/jpeg;base64,${imgUrl}`}
+                alt="generated-image"
+                className="object-cover max-h-[54vh] w-[47vw]"
+              />
+            </div>
+          )}
         </div>
-        <div className="border flex-1 bg-white"></div>
       </div>
 
       <div className=" min-w-[15rem] px-1 flex flex-col gap-10">
