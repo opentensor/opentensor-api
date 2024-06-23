@@ -111,6 +111,7 @@ function Page() {
               const file: any = await toBase64(acceptedFiles[0])
               setPreview(file)
             }}
+            disabled={avatarStr ? true : false}
           >
             {({ getRootProps, getInputProps }) => (
               <section>
@@ -130,14 +131,14 @@ function Page() {
                       <Loader />
                     ) : (
                       <>
-                        <p className="flex flex-col gap-10 text-muted-foreground items-center justify-center h-full dark:invert text-center text-wrap">
+                        <div className="flex flex-col gap-10 text-muted-foreground items-center justify-center h-full dark:invert text-center text-wrap">
                           Drag &apos;n&apos; drop some files here, <br />
                           or click to select files
                           <span className="text-xs">.png, .jpg, .webp</span>
                           <div className={`absolute z-50 ${!avatarStr ? 'hidden' : 'block'}`}>
-                            <ImageCard isLoading={loading} imgStr={avatarStr} />
+                            <ImageCard isLoading={loading} imgStr={avatarStr} handleReset={() => setAvatarStr('')} />
                           </div>
-                        </p>
+                        </div>
                       </>
                     )}
                   </div>

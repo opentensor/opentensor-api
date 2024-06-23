@@ -1,11 +1,13 @@
+import { RotateCcw } from 'lucide-react'
 import Image from 'next/image'
 import React, { useState } from 'react'
 
 interface Props {
   imgStr?: string
   isLoading?: boolean
+  handleReset: any
 }
-const ImageCard = ({ imgStr, isLoading }: Props) => {
+const ImageCard = ({ imgStr, isLoading, handleReset }: Props) => {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center">
@@ -14,8 +16,9 @@ const ImageCard = ({ imgStr, isLoading }: Props) => {
     )
   }
   return (
-    <div className="border border-slate-500 p-1">
-      <img src={`data:image/jpeg;base64,${imgStr}`} alt="generated-avatar" className="object-cover" />
+    <div className="border border-slate-500 p-1  relative">
+      <img src={`data:image/jpeg;base64,${imgStr}`} alt="generated-avatar" className="object-cover max-h-[68vh]" />
+      <RotateCcw size={22} className="absolute z-50 top-5 right-10 hover:cursor-pointer" onClick={handleReset} />
     </div>
   )
 }
