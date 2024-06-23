@@ -11,7 +11,8 @@ const initialApiState: ApiState = {
   status: 'IDLE',
   error: null,
   apiKeys: [],
-  apiLogs: []
+  apiLogs: [],
+  selectedKey: ''
 }
 
 const createApiSlice: StateCreator<CombinedSlices, [['zustand/immer', never], never], [], ApiSlice> = (set, get) => ({
@@ -105,6 +106,11 @@ const createApiSlice: StateCreator<CombinedSlices, [['zustand/immer', never], ne
           state.apiState.status = 'SUCCESS'
         })
       }
+    },
+    setSelectedKey: (key: string) => {
+      set((state) => {
+        state.apiState.selectedKey = key
+      })
     }
   }
 })

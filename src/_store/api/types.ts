@@ -10,6 +10,7 @@ export type ApiState = {
   error: unknown | null
   apiKeys: ApiKey[]
   apiLogs: ApiLog[]
+  selectedKey: string
 }
 
 export type ApiActions = {
@@ -17,6 +18,7 @@ export type ApiActions = {
   createNewApiKey: (name: string) => Promise<void>
   deleteApiKey: (key: ApiKey) => Promise<void>
   fetchAndSetApiLogsToState: () => Promise<void>
+  setSelectedKey: (key: string) => void
 }
 
 export type ApiKey = {

@@ -44,7 +44,7 @@ function Page() {
   const [isSubmitted, setIsSubmitted] = useState(false)
 
   async function onSubmit(data: AccountFormValues) {
-    console.log(data)
+    
     try {
       // setIsSubmitted(false)
       const res = await fetch('/api/contact-us', {
