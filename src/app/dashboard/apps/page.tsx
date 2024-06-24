@@ -13,40 +13,22 @@ export interface AppList {
 
 const appList: AppList[] = [
   {
-    name: 'Avatar',
-    description: 'Generate your Avatar with AI.',
+    name: 'TAO Image-Studio',
+    description: 'Image generation',
     imgSrc: 'https://corcel.b-cdn.net/082efbdd-8fac-4f99-9b1a-8232713319db.webp',
-    href: '/dashboard/apps/avatar'
+    href: '/dashboard/apps/image-studio/vision-avatar'
   },
   {
-    name: 'Chat',
-    description: 'Generate your Avatar with AI.',
+    name: 'BitAI Chat',
+    description: 'Intelligent chatbot',
     imgSrc: 'https://corcel.b-cdn.net/082efbdd-8fac-4f99-9b1a-8232713319db.webp',
-    href: '/dashboard/apps/chat'
-  },
-  {
-    name: 'Image-to-Image',
-    description: 'Generate your Avatar with AI.',
-    imgSrc: 'https://corcel.b-cdn.net/082efbdd-8fac-4f99-9b1a-8232713319db.webp',
-    href: '/dashboard/apps/'
-  },
-  {
-    name: 'Text-to-Image',
-    description: 'Generate your Avatar with AI.',
-    imgSrc: 'https://corcel.b-cdn.net/082efbdd-8fac-4f99-9b1a-8232713319db.webp',
-    href: '/dashboard/apps/'
+    href: '#'
   },
   {
     name: 'Avatar',
-    description: 'Generate your Avatar with AI.',
+    description: 'Generate your Avatar with AI',
     imgSrc: 'https://corcel.b-cdn.net/082efbdd-8fac-4f99-9b1a-8232713319db.webp',
-    href: '/dashboard/apps/'
-  },
-  {
-    name: 'Avatar',
-    description: 'Generate your Avatar with AI.',
-    imgSrc: 'https://corcel.b-cdn.net/082efbdd-8fac-4f99-9b1a-8232713319db.webp',
-    href: '/dashboard/apps/'
+    href: '/dashboard/apps/image-studio/vision-avatar'
   }
 ]
 
@@ -59,8 +41,8 @@ function Page() {
           <SkeletonLoader />
         ) : (
           <>
-            <AppSection items={appList} title="Popular Apps" />
             <AppSection items={appList} title="Latest Apps" />
+            {/* <AppSection items={appList} title="Popular Apps" /> */}
           </>
         )}
       </div>

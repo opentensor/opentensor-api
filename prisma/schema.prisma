@@ -19,6 +19,7 @@ model User {
   accounts      Account[]
   sessions      Session[]
   api_keys      ApiKey[]
+  image_studio_assets      ImageStudio[]
   stripe_customer_id       String?
   stripe_subscription_item String?
   role          Role      @default(USER) 
@@ -91,6 +92,14 @@ model ApiKey {
   key_tag         String   @unique
   tier            TIER @default(FREE)
   User            User  @relation(fields: [user_id], references: [id])
+}
+model ImageStudio {
+  id    String     @id @default(uuid())
+  app_tag   String  
+  img_str String
+  createdAt   DateTime    @default(now())
+  User            User  @relation(fields: [user_id], references: [id])
+  user_id         String
 }
 
 model ComputeJobs {

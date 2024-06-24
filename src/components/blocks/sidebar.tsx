@@ -53,6 +53,8 @@ const Navigation = () => {
   const pathname = usePathname()
   const router = useRouter()
 
+  const hasPathname = pathname.includes('/dashboard/apps')
+
   useEffect(() => {
     if (isOpen) {
       containerControls.start('open')
@@ -96,7 +98,7 @@ const Navigation = () => {
         name: 'App Center',
         href: '/dashboard/apps',
         icon: RiApps2Fill,
-        active: pathname === '/dashboard/apps'
+        active: hasPathname
       },
       {
         name: 'Docs',

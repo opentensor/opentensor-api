@@ -37,3 +37,22 @@ export async function getAllApiLogsOfUser() {
 
   return data
 }
+export async function getAllImageStudioAssetsOfUser() {
+  const res = await fetch('/api/image-studio')
+  const data = await res.json()
+
+  return data
+}
+
+export async function deleteAsset(id: string) {
+  const res = await fetch('/api/image-studio', {
+    method: 'DELETE',
+    body: JSON.stringify({
+      id
+    })
+  })
+
+  const data = await res.json()
+
+  return data
+}

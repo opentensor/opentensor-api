@@ -10,6 +10,8 @@ export type ApiState = {
   error: unknown | null
   apiKeys: ApiKey[]
   apiLogs: ApiLog[]
+  imageStudioAssets: ImageStudioAssets[]
+  selectedKey: string
 }
 
 export type ApiActions = {
@@ -17,6 +19,9 @@ export type ApiActions = {
   createNewApiKey: (name: string) => Promise<void>
   deleteApiKey: (key: ApiKey) => Promise<void>
   fetchAndSetApiLogsToState: () => Promise<void>
+  fetchAndSetImageStudioAssetsToState: () => Promise<void>
+  deleteImageStudioAsset: (asset: ImageStudioAssets) => Promise<void>
+  setSelectedKey: (key: string) => void
 }
 
 export type ApiKey = {
@@ -40,6 +45,13 @@ export type ApiLog = {
   status: string
   ip: string
   created_at: string
+}
+
+export type ImageStudioAssets = {
+  id: string
+  app_tag: String
+  img_str: String
+  user_id: string
 }
 
 export type StripePlan = {
