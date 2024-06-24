@@ -113,7 +113,7 @@ function Page() {
               const file: any = await toBase64(acceptedFiles[0])
               setPreview(file)
             }}
-            disabled={avatarStr ? true : false}
+            disabled={loading || avatarStr ? true : false}
           >
             {({ getRootProps, getInputProps }) => (
               <section>

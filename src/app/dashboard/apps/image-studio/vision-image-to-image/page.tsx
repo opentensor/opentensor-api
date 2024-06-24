@@ -1,7 +1,13 @@
 'use client'
-import { Send } from 'lucide-react'
+import { RotateCcw, Send } from 'lucide-react'
 import React from 'react'
+import Dropzone from 'react-dropzone'
+import toast, { Toaster } from 'react-hot-toast'
 
+import { useGlobalStore } from '@/_store/globalStore'
+import { toBase64 } from '@/_utils/base64'
+import Loader from '@/components/blocks/loader'
+import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import {
@@ -15,7 +21,7 @@ import {
 } from '@/components/ui/select'
 import { Slider } from '@/components/ui/slider'
 
-import MyDropzone from './components/MyDropzone'
+import ImageCard from './components/ImageCard'
 
 function Page() {
   const engine = ['proteus', 'dreamshaper', 'playground', 'stable-diffusion-xl-turbo']
@@ -23,22 +29,141 @@ function Page() {
   const [imageStrength, setImageStrength] = React.useState([0.25])
   const [steps, setSteps] = React.useState([9])
   const [engineValue, setEngineValue] = React.useState('proteus')
+  const [prompt, setPrompt] = React.useState<string>('')
+  const [generatedImg, setGeneratedImg] = React.useState<string>('')
+  const [preview, setPreview] = React.useState<string>('')
+  const [loading, setLoading] = React.useState(false)
+  const selectedKey = useGlobalStore((state) => state.apiState.selectedKey)
+
+  function handlePromptChange(e: React.ChangeEvent<HTMLInputElement>) {
+    setPrompt(e.target.value)
+  }
+
+  function handleReset() {
+    setPreview('')
+  }
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault()
+    if (!preview) {
+      toast.error('Please upload an image', { position: 'top-right' })
+      return
+    }
+    if (!selectedKey) {
+      toast.error('Please select a valid api key', { position: 'top-right' })
+      return
+    }
+    const initImg = preview.split(',')[1]
+    let reqData = JSON.stringify({
+      cfg_scale: guidanceScale.toString(),
+      steps: steps.toString(),
+      engine: engineValue,
+      init_image: initImg,
+      text_prompts: [
+        {
+          text: prompt
+        }
+      ],
+      image_strength: imageStrength.toString()
+    })
+
+    try {
+      setLoading(true)
+
+      setPrompt('')
+
+      setPreview('')
+
+      const res = await fetch('/api/vision-image-to-image', {
+        method: 'POST',
+        headers: { accept: 'application/json', 'Content-Type': 'application/json', 'X-API-KEY': selectedKey },
+        body: reqData
+      })
+
+      const response = await res.json()
+      if (response.success) {
+        setGeneratedImg(response.result.image_b64)
+      }
+      if (response.error) {
+        toast.error('Failed to retrieve image. Please try again.', { position: 'top-right' })
+      }
+    } catch (error) {
+      setPrompt('')
+
+      setPreview('')
+
+      console.log(error)
+    }
+
+    setLoading(false)
+  }
 
   return (
     <div className="flex px-8 gap-3 py-4">
+      <Toaster />
+
       <div className="w-full h-full flex flex-col justify-center gap-10 dark:invert">
-        <div className="flex-1">
-          <MyDropzone />
+        <div className="bg-white border flex-1">
+          <Dropzone
+            accept={{ 'image/jpeg': ['.png', '.webp', '.jpeg', '.jpg'] }}
+            onDrop={async (acceptedFiles: any) => {
+              const file: any = await toBase64(acceptedFiles[0])
+              setPreview(file)
+            }}
+            disabled={loading || generatedImg ? true : false}
+          >
+            {({ getRootProps, getInputProps }) => (
+              <section>
+                {preview ? (
+                  <div className="relative">
+                    <img src={preview} alt="Uploaded avatar" />
+                    <RotateCcw
+                      size={22}
+                      className="absolute z-50 top-5 right-10 hover:cursor-pointer"
+                      onClick={handleReset}
+                    />
+                  </div>
+                ) : (
+                  <div {...getRootProps()} className="h-[30rem] hover:cursor-pointer">
+                    <input {...getInputProps()} />
+                    {loading ? (
+                      <Loader />
+                    ) : (
+                      <>
+                        <div className="flex flex-col gap-10 text-muted-foreground items-center justify-center h-full dark:invert text-center text-wrap">
+                          Drag &apos;n&apos; drop some files here, <br />
+                          or click to select files
+                          <span className="text-xs">.png, .jpg, .webp</span>
+                          <div className={`absolute z-50 ${!generatedImg ? 'hidden' : 'block'}`}>
+                            <ImageCard
+                              isLoading={loading}
+                              imgStr={generatedImg}
+                              handleReset={() => setGeneratedImg('')}
+                            />
+                          </div>
+                        </div>
+                      </>
+                    )}
+                  </div>
+                )}
+              </section>
+            )}
+          </Dropzone>
         </div>
-        <div className="flex items-center bg-white border px-4">
+
+        <form onSubmit={handleSubmit} className="flex items-center bg-white border px-4">
           <Input
             className="h-12 shadow-none border-none dark:invert px-2 focus-visible:ring-0"
             placeholder="Imagine and describe what you want to see"
+            value={prompt}
+            onChange={handlePromptChange}
+            required
+            disabled={loading}
           />
-          <div className="p-2 shadow-sm">
+          <Button type="submit" variant="ghost" className="p-2 shadow-sm" disabled={loading}>
             <Send className="dark:invert hover:cursor-pointer" />
-          </div>
-        </div>
+          </Button>
+        </form>
       </div>
 
       <div className=" min-w-[15rem] px-1 flex flex-col gap-10">

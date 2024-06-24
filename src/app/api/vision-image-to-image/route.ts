@@ -50,7 +50,7 @@ export async function POST(request: NextRequest) {
       }
     })
 
-    return NextResponse.json(result, { status: 200 })
+    return NextResponse.json({ success: true, result }, { status: 200 })
   } catch (error: any) {
     await prisma.apiLog.create({
       data: {

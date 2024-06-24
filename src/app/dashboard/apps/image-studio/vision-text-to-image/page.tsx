@@ -32,7 +32,6 @@ function Page() {
   const [steps, setSteps] = React.useState([9])
   const [engineValue, setEngineValue] = React.useState<string>('proteus')
 
-
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
     if (!selectedKey) {
@@ -50,7 +49,6 @@ function Page() {
       cfg_scale: guidanceScale.toString()
     })
 
-   
     try {
       setPrompt('')
       setLoading(true)
@@ -87,7 +85,7 @@ function Page() {
             required
             disabled={loading}
           />
-          <Button type="submit" variant="ghost" className="p-2 shadow-sm">
+          <Button type="submit" variant="ghost" className="p-2 shadow-sm" disabled={loading}>
             <Send className="dark:invert hover:cursor-pointer" />
           </Button>
         </form>
