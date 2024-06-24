@@ -81,6 +81,29 @@ function Page() {
     setLoading(false)
   }
 
+  async function handleUpload() {
+    try {
+      setLoading(true)
+      const res = await fetch('/api/image-studio', {
+        method: 'POST',
+        body: JSON.stringify({ avatarStr })
+      })
+
+      const response = await res.json()
+
+      if (response.success) {
+        toast.success('Avatar saved successfully.', { position: 'top-right' })
+        setAvatarStr('')
+      }
+      if (response.error) {
+        toast.error('Failed to generate avatar. Please try again.', { position: 'top-right' })
+      }
+    } catch (error) {
+      console.log(error)
+    }
+    setLoading(false)
+  }
+
   return (
     <div className="flex items-center justify-center h-full gap-28">
       <Toaster />
@@ -138,7 +161,12 @@ function Page() {
                           or click to select files
                           <span className="text-xs">.png, .jpg, .webp</span>
                           <div className={`absolute z-50 ${!avatarStr ? 'hidden' : 'block'}`}>
-                            <ImageCard isLoading={loading} imgStr={avatarStr} handleReset={() => setAvatarStr('')} />
+                            <ImageCard
+                              isLoading={loading}
+                              imgStr={avatarStr}
+                              handleReset={() => setAvatarStr('')}
+                              handleUpload={handleUpload}
+                            />
                           </div>
                         </div>
                       </>

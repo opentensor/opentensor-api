@@ -4,7 +4,14 @@ import { StateCreator } from 'zustand'
 import { withAsync } from '@/_utils/withAsync'
 
 import { CombinedSlices } from '../types'
-import { createNewApiKey, deleteKey, getAllApiKeysOfUser, getAllApiLogsOfUser } from './actions'
+import {
+  createNewApiKey,
+  deleteAsset,
+  deleteKey,
+  getAllApiKeysOfUser,
+  getAllApiLogsOfUser,
+  getAllImageStudioAssetsOfUser
+} from './actions'
 import { ApiSlice, ApiState } from './types'
 
 const initialApiState: ApiState = {
@@ -12,6 +19,7 @@ const initialApiState: ApiState = {
   error: null,
   apiKeys: [],
   apiLogs: [],
+  imageStudioAssets: [],
   selectedKey: ''
 }
 
@@ -103,6 +111,50 @@ const createApiSlice: StateCreator<CombinedSlices, [['zustand/immer', never], ne
       if (response && response.success) {
         set((state) => {
           state.apiState.apiLogs = response.data
+          state.apiState.status = 'SUCCESS'
+        })
+      }
+    },
+    fetchAndSetImageStudioAssetsToState: async () => {
+      set((state) => {
+        state.apiState.status = 'PENDING'
+      })
+
+      const { response, error } = await withAsync(getAllImageStudioAssetsOfUser)
+
+      if (error || response.error) {
+        set((state) => {
+          state.apiState.error = response?.error || 'Something went wrong.'
+          state.apiState.status = 'ERROR'
+        })
+      }
+
+      if (response && response.success) {
+        set((state) => {
+          state.apiState.imageStudioAssets = response.result
+          state.apiState.status = 'SUCCESS'
+        })
+      }
+    },
+    deleteImageStudioAsset: async (asset) => {
+      set((state) => {
+        state.apiState.status = 'PENDING'
+      })
+
+      const { response, error } = await withAsync(() => deleteAsset(asset.id))
+
+      if (error || response.error) {
+        set((state) => {
+          state.apiState.error = response?.error || 'Something went wrong.'
+          state.apiState.status = 'ERROR'
+        })
+      }
+
+      if (response && response.success) {
+        set((state) => {
+          const filteredAssets = get().apiState.imageStudioAssets.filter((_asset) => _asset.id !== asset.id)
+
+          state.apiState.imageStudioAssets = filteredAssets
           state.apiState.status = 'SUCCESS'
         })
       }

@@ -53,9 +53,7 @@ const Navigation = () => {
   const pathname = usePathname()
   const router = useRouter()
 
-  const url = new URL(window.location.href)
-
-  const hasPathname = url.pathname.includes('/dashboard/apps')
+  const hasPathname = pathname.includes('/dashboard/apps')
 
   useEffect(() => {
     if (isOpen) {
