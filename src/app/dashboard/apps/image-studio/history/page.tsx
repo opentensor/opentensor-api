@@ -36,13 +36,17 @@ function Page() {
       ) : (
         <>
           {imageStudioAssets.length === 0 && <div className="flex justify-center">No saved images</div>}
-          {imageStudioAssets.map((asset) => {
-            return (
-              <div className="flex flex-wrap gap-1 justify-between h-fit" key={asset.id}>
-                <ImageCard imgStr={asset.img_str.toString()} handleDelete={() => deleteImageStudioAsset(asset)} />
-              </div>
-            )
-          })}
+          <div className="flex flex-wrap gap-2 h-fit">
+            {imageStudioAssets.map((asset) => {
+              return (
+                <ImageCard
+                  key={asset.id}
+                  imgStr={asset.img_str.toString()}
+                  handleDelete={() => deleteImageStudioAsset(asset)}
+                />
+              )
+            })}
+          </div>
         </>
       )}
     </div>

@@ -1,13 +1,16 @@
-import { RotateCcw } from 'lucide-react'
+import { CloudUpload, RotateCcw } from 'lucide-react'
 import Image from 'next/image'
-import React, { useState } from 'react'
+import React from 'react'
+
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 
 interface Props {
   imgStr?: string
   isLoading?: boolean
   handleReset: any
+  handleUpload: any
 }
-const ImageCard = ({ imgStr, isLoading, handleReset }: Props) => {
+const ImageCard = ({ imgStr, isLoading, handleReset, handleUpload }: Props) => {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center">
@@ -22,11 +25,26 @@ const ImageCard = ({ imgStr, isLoading, handleReset }: Props) => {
         alt="generated-image"
         className="object-cover max-h-[47vh] w-[46vw]"
       />
-      <RotateCcw
-        size={22}
-        className="text-black rounded-md absolute z-50 top-5 right-10 hover:cursor-pointer"
-        onClick={handleReset}
-      />
+      <TooltipProvider delayDuration={100}>
+        <Tooltip>
+          <TooltipTrigger className="absolute z-50 top-5 right-10">
+            <div onClick={handleReset} className="hover:bg-transparent hover:text-white text-slate-500 dark:invert">
+              <RotateCcw size={22} />
+              <TooltipContent side="right">Reset</TooltipContent>
+            </div>
+          </TooltipTrigger>
+        </Tooltip>
+      </TooltipProvider>
+      <TooltipProvider delayDuration={100}>
+        <Tooltip>
+          <TooltipTrigger className="absolute z-50 top-5 right-24 ">
+            <div onClick={handleUpload} className="hover:bg-transparent hover:text-white text-slate-500 dark:invert">
+              <CloudUpload size={22} />
+              <TooltipContent side="right">Save to cloud</TooltipContent>
+            </div>
+          </TooltipTrigger>
+        </Tooltip>
+      </TooltipProvider>
     </div>
   )
 }
