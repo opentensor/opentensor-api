@@ -82,11 +82,15 @@ function Page() {
   }
 
   async function handleUpload() {
+    const reqBody = JSON.stringify({
+      imgStr: avatarStr,
+      appTag: 'Avatar'
+    })
     try {
       setLoading(true)
       const res = await fetch('/api/image-studio', {
         method: 'POST',
-        body: JSON.stringify({ avatarStr })
+        body: reqBody
       })
 
       const response = await res.json()

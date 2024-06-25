@@ -24,8 +24,9 @@ export async function POST(request: NextRequest) {
 
   if (!session) return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 })
 
-  const { avatarStr } = (await request.json()) as {
-    avatarStr: string
+  const { imgStr, appTag } = (await request.json()) as {
+    imgStr: string
+    appTag: string
   }
 
   const user = await prisma.user.findUnique({ where: { email: String(session.user.email) } })
@@ -34,8 +35,8 @@ export async function POST(request: NextRequest) {
 
   const result = await prisma.imageStudio.create({
     data: {
-      app_tag: 'avatar',
-      img_str: avatarStr,
+      app_tag: appTag,
+      img_str: imgStr,
       user_id: user.id
     }
   })

@@ -98,6 +98,33 @@ function Page() {
     setLoading(false)
   }
 
+  async function handleUpload() {
+    const reqBody = JSON.stringify({
+      imgStr: generatedImg,
+      appTag: 'Reimagine'
+    })
+    try {
+      setLoading(true)
+      const res = await fetch('/api/image-studio', {
+        method: 'POST',
+        body: reqBody
+      })
+
+      const response = await res.json()
+
+      if (response.success) {
+        toast.success('Image saved successfully.', { position: 'top-right' })
+        setGeneratedImg('')
+      }
+      if (response.error) {
+        toast.error('Failed to generate Image. Please try again.', { position: 'top-right' })
+      }
+    } catch (error) {
+      console.log(error)
+    }
+    setLoading(false)
+  }
+
   return (
     <div className="flex px-8 gap-3 py-4">
       <Toaster />
@@ -139,6 +166,7 @@ function Page() {
                               isLoading={loading}
                               imgStr={generatedImg}
                               handleReset={() => setGeneratedImg('')}
+                              handleUpload={handleUpload}
                             />
                           </div>
                         </div>

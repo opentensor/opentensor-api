@@ -1,5 +1,5 @@
 'use client'
-import { Send } from 'lucide-react'
+import { CloudUpload, Send } from 'lucide-react'
 import React from 'react'
 import toast, { Toaster } from 'react-hot-toast'
 
@@ -18,6 +18,7 @@ import {
   SelectValue
 } from '@/components/ui/select'
 import { Slider } from '@/components/ui/slider'
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 
 import ImageCard from '../vision-avatar/components/ImageCard'
 
@@ -71,6 +72,33 @@ function Page() {
     setLoading(false)
   }
 
+  async function handleUpload() {
+    const reqBody = JSON.stringify({
+      imgStr: imgUrl,
+      appTag: 'Generate'
+    })
+    try {
+      setLoading(true)
+      const res = await fetch('/api/image-studio', {
+        method: 'POST',
+        body: reqBody
+      })
+
+      const response = await res.json()
+
+      if (response.success) {
+        toast.success('Image saved successfully.', { position: 'top-right' })
+        setImgUrl('')
+      }
+      if (response.error) {
+        toast.error('Failed to generate image. Please try again.', { position: 'top-right' })
+      }
+    } catch (error) {
+      console.log(error)
+    }
+    setLoading(false)
+  }
+
   return (
     <div className="flex h-full px-8 gap-3 py-4">
       <Toaster />
@@ -99,6 +127,19 @@ function Page() {
                 alt="generated-image"
                 className="object-cover max-h-[54vh] w-[47vw]"
               />
+              <TooltipProvider delayDuration={100}>
+                <Tooltip>
+                  <TooltipTrigger className="absolute z-50 top-5 right-24 ">
+                    <div
+                      onClick={handleUpload}
+                      className="hover:bg-transparent hover:text-white text-slate-500 dark:invert"
+                    >
+                      <CloudUpload size={22} />
+                      <TooltipContent side="right">Save to cloud</TooltipContent>
+                    </div>
+                  </TooltipTrigger>
+                </Tooltip>
+              </TooltipProvider>
             </div>
           )}
         </div>
