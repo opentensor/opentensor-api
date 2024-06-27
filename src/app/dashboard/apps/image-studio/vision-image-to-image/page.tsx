@@ -129,8 +129,8 @@ function Page() {
     <div className="flex px-8 gap-3 py-4">
       <Toaster />
 
-      <div className="w-full h-full flex flex-col justify-center gap-10 dark:invert">
-        <div className="bg-white border flex-1">
+      <div className="w-full h-full flex flex-col justify-center gap-10">
+        <div className="bg-white border flex-1 dark:bg-black">
           <Dropzone
             accept={{ 'image/jpeg': ['.png', '.webp', '.jpeg', '.jpg'] }}
             onDrop={async (acceptedFiles: any) => {
@@ -142,8 +142,8 @@ function Page() {
             {({ getRootProps, getInputProps }) => (
               <section>
                 {preview ? (
-                  <div className="relative">
-                    <img src={preview} alt="Uploaded avatar" />
+                  <div className="relative ">
+                    <img src={preview} alt="Uploaded avatar" className="h-[30rem]" />
                     <RotateCcw
                       size={22}
                       className="absolute z-50 top-5 right-10 hover:cursor-pointer"
@@ -157,7 +157,7 @@ function Page() {
                       <Loader />
                     ) : (
                       <>
-                        <div className="flex flex-col gap-10 text-muted-foreground items-center justify-center h-full dark:invert text-center text-wrap">
+                        <div className="flex flex-col gap-10 text-muted-foreground items-center justify-center h-full text-center text-wrap">
                           Drag &apos;n&apos; drop some files here, <br />
                           or click to select files
                           <span className="text-xs">.png, .jpg, .webp</span>
@@ -179,7 +179,7 @@ function Page() {
           </Dropzone>
         </div>
 
-        <form onSubmit={handleSubmit} className="flex items-center bg-white border px-4">
+        <form onSubmit={handleSubmit} className="flex items-center bg-white border px-4 dark:invert">
           <Input
             className="h-12 shadow-none border-none dark:invert px-2 focus-visible:ring-0"
             placeholder="Imagine and describe what you want to see"

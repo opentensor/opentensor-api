@@ -20,11 +20,7 @@ const ImageCard = ({ imgStr, isLoading, handleReset, handleUpload }: Props) => {
   }
   return (
     <div className="border rounded-md border-slate-500 p-1  relative">
-      <img
-        src={`data:image/jpeg;base64,${imgStr}`}
-        alt="generated-image"
-        className="object-cover max-h-[47vh] w-[46vw]"
-      />
+      <img src={`data:image/jpeg;base64,${imgStr}`} alt="generated-image" className="object-cover h-[30rem] w-[46vw]" />
       <TooltipProvider delayDuration={100}>
         <Tooltip>
           <TooltipTrigger className="absolute z-50 top-5 right-10">

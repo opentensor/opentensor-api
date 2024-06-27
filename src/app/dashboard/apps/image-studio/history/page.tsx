@@ -36,7 +36,7 @@ function Page() {
       ) : (
         <>
           {imageStudioAssets.length === 0 && <div className="flex justify-center">No saved images</div>}
-          <div className="flex flex-wrap gap-2 h-fit">
+          <div className={`flex flex-wrap gap-2 h-fit ${imageStudioAssets.length > 3 ? ' justify-around' : ''}`}>
             {imageStudioAssets.map((asset) => {
               return (
                 <ImageCard
