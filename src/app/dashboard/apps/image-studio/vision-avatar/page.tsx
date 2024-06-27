@@ -121,7 +121,7 @@ function Page() {
         <Textarea
           required
           placeholder="Describe how you'd like your avatar to look..."
-          className="resize-none w-full text-sm h-[120px] "
+          className="resize-none w-full text-sm h-[120px] bg-white dark:bg-black "
           value={prompt}
           onChange={handlePromptChange}
         />
@@ -133,7 +133,7 @@ function Page() {
       </form>
 
       <div className="w-full h-full flex flex-col justify-center rounded-lg">
-        <div className="bg-white dark:invert border">
+        <div className="bg-white dark:bg-black border">
           <Dropzone
             accept={{ 'image/jpeg': ['.png', '.webp', '.jpeg', '.jpg'] }}
             onDrop={async (acceptedFiles: any) => {
@@ -146,7 +146,7 @@ function Page() {
               <section>
                 {preview ? (
                   <div className="relative">
-                    <img src={preview} alt="Uploaded avatar" />
+                    <img src={preview} alt="Uploaded avatar" className="h-[30rem]" />
                     <RotateCcw
                       size={22}
                       className="absolute z-50 top-5 right-10 hover:cursor-pointer"
@@ -160,7 +160,7 @@ function Page() {
                       <Loader />
                     ) : (
                       <>
-                        <div className="flex flex-col gap-10 text-muted-foreground items-center justify-center h-full dark:invert text-center text-wrap">
+                        <div className="flex flex-col gap-10 text-muted-foreground items-center justify-center h-full text-center text-wrap">
                           Drag &apos;n&apos; drop some files here, <br />
                           or click to select files
                           <span className="text-xs">.png, .jpg, .webp</span>

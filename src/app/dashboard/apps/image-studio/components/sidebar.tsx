@@ -39,13 +39,13 @@ const Sidebar = () => {
   ]
 
   return (
-    <div className="h-[70vh] flex flex-col gap-4  justify-center text-neutral-400 dark:invert bg-white  rounded-r-lg ">
+    <div className="h-[70vh] flex flex-col gap-4  justify-center text-neutral-400 dark:invert bg-white  rounded-r-lg fixed">
       {imgStudioicons.map((item, index) => (
         <div key={index}>
           <TooltipProvider delayDuration={100}>
             <Tooltip>
               <Link href={item.to} className="hover:text-black">
-                <TooltipTrigger className={`${item.active ? 'text-black dark:text-white' : 'text-neutral-400'}`}>
+                <TooltipTrigger className={`${item.active ? 'text-black' : 'text-neutral-400'}`}>
                   {item.icon}
                 </TooltipTrigger>
                 <TooltipContent side="right">

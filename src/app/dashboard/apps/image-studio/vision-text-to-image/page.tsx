@@ -103,8 +103,8 @@ function Page() {
     <div className="flex h-full px-8 gap-3 py-4">
       <Toaster />
 
-      <div className="w-full h-full flex flex-col justify-center gap-10 dark:invert">
-        <form onSubmit={handleSubmit} className="flex items-center bg-white border px-4 ">
+      <div className="w-full h-full flex flex-col justify-center gap-10">
+        <form onSubmit={handleSubmit} className="flex items-center bg-white border px-4 dark:invert">
           <Input
             className="h-12 shadow-none border-none dark:invert px-2 focus-visible:ring-0 "
             placeholder="Imagine and describe what you want to see"
@@ -117,7 +117,7 @@ function Page() {
             <Send className="dark:invert hover:cursor-pointer" />
           </Button>
         </form>
-        <div className="relative border flex-1 bg-white">
+        <div className="relative border flex-1 bg-white dark:bg-black">
           {loading ? (
             <Loader />
           ) : (
